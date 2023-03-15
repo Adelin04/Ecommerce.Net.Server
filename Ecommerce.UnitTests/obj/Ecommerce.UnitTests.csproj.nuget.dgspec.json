@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {}
+    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {}
   },
   "projects": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {
+    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+        "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
         "projectName": "Ecommerce.UnitTests",
-        "projectPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+        "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
         "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-        "outputPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\obj\\",
+        "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"
