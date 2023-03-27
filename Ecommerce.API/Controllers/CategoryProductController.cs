@@ -44,7 +44,7 @@ public class CategoryProductController : ControllerBase
     }
 
     [HttpGet("get/allCategoriesProduct")]
-    public async Task<ActionResult> GetAllProducts()
+    public async Task<ActionResult> GetAllProductCategories()
     {
         try
         {
@@ -68,5 +68,27 @@ public class CategoryProductController : ControllerBase
         }
 
         return BadRequest(new { Success = false, Message = "Product category list could not be returned!" });
+    }
+
+    [HttpDelete("delete/categoryByName/{name}")]
+    public async Task<ActionResult> DeleteCategoryProductByName(string name){
+        var removedProductCategory = await this._categoryProductService.DeleteCategoryProductByName(name)
+        
+        try
+        {
+            if(removedCategoryProduct is not null){
+                this.Logger.LogInformation($"Category {removedCategoryProduct.Name} was removed from DB");
+                return Ok(new { Success = true, CategoryRemoved = removedCategoryProduct });
+            }
+        }
+        catch (System.Exception)
+        {
+          
+            Console.WriteLine("Error -> " + exception.Message);
+            this.Logger.LogInformation(exception.Message.ToString());
+        }
+
+        this.Logger.LogInformation($"The category {removedProduct.Name} could not be removed from DB!");
+        return BadRequest(new { Success = false, Message = $"The category {removedProduct.Name} could not be removed from DB!" });
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.API\\Ecommerce.API.csproj": {}
+    "/root/Ecommerce.Server/Ecommerce/Ecommerce.API/Ecommerce.API.csproj": {}
   },
   "projects": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.API\\Ecommerce.API.csproj": {
+    "/root/Ecommerce.Server/Ecommerce/Ecommerce.API/Ecommerce.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.API\\Ecommerce.API.csproj",
+        "projectUniqueName": "/root/Ecommerce.Server/Ecommerce/Ecommerce.API/Ecommerce.API.csproj",
         "projectName": "Ecommerce.API",
-        "projectPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.API\\Ecommerce.API.csproj",
-        "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-        "outputPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\Ecommerce.Server\\Ecommerce\\Ecommerce.API\\obj\\",
+        "projectPath": "/root/Ecommerce.Server/Ecommerce/Ecommerce.API/Ecommerce.API.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/root/Ecommerce.Server/Ecommerce/Ecommerce.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -93,29 +93,10 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.13, 6.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.13, 6.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.13, 6.0.13]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.13, 6.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -124,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.1.23115.2\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
         }
       }
     }

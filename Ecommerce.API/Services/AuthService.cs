@@ -36,6 +36,8 @@ public class AuthService
         var defaultRole = await this._roleRepository.GetRoleByNameAsync(DEFAULT_ROLE);
         var existingUser = await this._userRepository.GetUserByEmailAsync(candidateUser.Email);
 
+        System.Console.WriteLine("existingUser --> " + existingUser);
+
         if (existingUser is null && defaultRole is not null)
         {
             newUser = new User();

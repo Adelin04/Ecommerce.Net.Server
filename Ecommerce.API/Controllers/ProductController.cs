@@ -119,7 +119,6 @@ public class ProductController : ControllerBase
     [HttpDelete("delete/productById/{id}")]
     public async Task<ActionResult> DeleteProductById([FromRoute] long id)
     {
-        Console.WriteLine(id);
         var removedProduct = await this._productService.DeleteProductById_ServiceAsync(id);
         try
         {

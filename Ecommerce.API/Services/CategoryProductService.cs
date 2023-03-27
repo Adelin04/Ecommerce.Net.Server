@@ -38,4 +38,12 @@ public class CategoryProductService
             return allCategories;
         return null;
     }
+
+    public async Task<CategoryProduct> DeleteProductCategoryByName_ServiceAsync(string nameCategory){
+        var remocedProductCategory = await this.categoryProductRepository.DeleteProductCategoryByName(nameCategory);
+
+        if(remocedProductCategory is not null)
+            return remocedProductCategory
+        return null
+    }
 }

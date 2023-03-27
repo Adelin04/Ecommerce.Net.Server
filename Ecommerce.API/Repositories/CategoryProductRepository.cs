@@ -58,4 +58,21 @@ public class CategoryProductRepository : ICategoryProductRepository
             return findCategoryProductByName;
         return null;
     }
+
+    public async Task<CategoryProduct> DeleteCategoryProductByNameAsync(string nameCategory){
+        var foundCategoryProductByName = await GetCategoryProductByNameAsync(nameCategory)
+
+        if(foundCategoryProductByName is not null)
+        {
+            var removedCategoryProduct = await this._context.CategoryProduct.Remove(foundCategoryProductByName)
+
+            if(removedCategoryProduct is EntityState.Deleted)
+            {
+                await this._context.SaveChangesAsync()
+                return foundCategoryProductByName;
+            }
+
+        }
+        return null;
+    }
 }

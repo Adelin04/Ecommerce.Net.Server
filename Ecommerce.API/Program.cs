@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,20 +97,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 app.UseCors(builder =>
 {
     builder
-        .WithOrigins(new[] { "https://ecommerce-dotnet-react.herokuapp.com", " http://localhost:3000" })
+        .WithOrigins(new[] { "https://am-cloud.eu", " http://localhost:3000" })
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader();
 });
 
-app.UseHttpsRedirection();
+app.UseAuthentication();
+
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-// mysql://b609c2d44b296b:e9b5f791@eu-cdbr-west-03.cleardb.net/heroku_dff5a6f1b39ccb6?reconnect=true
