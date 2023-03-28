@@ -71,7 +71,9 @@ public class CategoryProductController : ControllerBase
     }
 
     [HttpDelete("delete/categoryByName/{name}")]
-    public async Task<ActionResult> DeleteCategoryProductByName(string name){
+    public async Task<ActionResult> DeleteCategoryProductByName([FromRoute] string name){
+
+        // System.Console.WriteLine("name" + name);
         var removedProductCategory = await this._categoryProductService.DeleteCategoryProductByName(name)
         
         try

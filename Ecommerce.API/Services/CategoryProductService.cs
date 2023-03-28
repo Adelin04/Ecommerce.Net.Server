@@ -40,10 +40,10 @@ public class CategoryProductService
     }
 
     public async Task<CategoryProduct> DeleteProductCategoryByName_ServiceAsync(string nameCategory){
-        var remocedProductCategory = await this.categoryProductRepository.DeleteProductCategoryByName(nameCategory);
+        var removedProductCategory = await this.categoryProductRepository.GetCategoryProductByNameAsync(nameCategory);
 
-        if(remocedProductCategory is not null)
-            return remocedProductCategory
+        if(removedCategoryProduct is not null)
+            return removedCategoryProduct
         return null
     }
 }
