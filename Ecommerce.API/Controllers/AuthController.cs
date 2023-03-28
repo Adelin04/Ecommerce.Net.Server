@@ -47,7 +47,7 @@ public class AuthController : ControllerBase
 
             if (token is not null)
                 return Ok(new { Success = true, Token = token });
-            return BadRequest(new { Success = false, Message = "There is no account with this email address yet !" });
+            return BadRequest(new { Success = false, Message = "The email or password is wrong!" });
         }
         catch (Exception exception)
         {

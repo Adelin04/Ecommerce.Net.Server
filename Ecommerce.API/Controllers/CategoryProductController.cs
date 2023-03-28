@@ -70,27 +70,27 @@ public class CategoryProductController : ControllerBase
         return BadRequest(new { Success = false, Message = "Product category list could not be returned!" });
     }
 
-    [HttpDelete("delete/categoryByName/{name}")]
-    public async Task<ActionResult> DeleteCategoryProductByName([FromRoute] string name){
+    [HttpDelete("delete/categoryByName/{categoryName}")]
+    public async Task<ActionResult> DeleteCategoryProductByName([FromRoute] string categoryName){
 
         // System.Console.WriteLine("name" + name);
-        var removedProductCategory = await this._categoryProductService.DeleteCategoryProductByName(name)
+        var removedCategoryName = await this._categoryProductService.DeleteCategoryProductByName_ServiceAsync(categoryName);
         
         try
         {
-            if(removedCategoryProduct is not null){
-                this.Logger.LogInformation($"Category {removedCategoryProduct.Name} was removed from DB");
-                return Ok(new { Success = true, CategoryRemoved = removedCategoryProduct });
+            if(removedCategoryName is not null){
+                this.Logger.LogInformation($"Category {removedCategoryName.Name} was removed from DB");
+                return Ok(new { Success = true, CategoryRemoved = removedCategoryName });
             }
         }
-        catch (System.Exception)
+        catch (System.Exception exception)
         {
           
             Console.WriteLine("Error -> " + exception.Message);
             this.Logger.LogInformation(exception.Message.ToString());
         }
 
-        this.Logger.LogInformation($"The category {removedProduct.Name} could not be removed from DB!");
-        return BadRequest(new { Success = false, Message = $"The category {removedProduct.Name} could not be removed from DB!" });
+        this.Logger.LogInformation($"The category {categoryName} could not be removed from DB!");
+        return BadRequest(new { Success = false, Message = $"The category {categoryName} could not be removed from DB!" });
     }
 }
