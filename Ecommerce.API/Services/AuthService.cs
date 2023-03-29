@@ -45,7 +45,6 @@ public class AuthService
             newUser.LastName = candidateUser.Lastname;
             newUser.Email = candidateUser.Email;
             newUser.Password = BCrypt.Net.BCrypt.HashPassword(candidateUser.Password);
-            newUser.ProfileImagePath = candidateUser.ProfileImagePath;
 
             var userCreated = await this._authRepository.CreateUserAsync(newUser);
 

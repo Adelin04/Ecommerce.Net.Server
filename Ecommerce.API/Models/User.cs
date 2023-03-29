@@ -17,7 +17,7 @@ public class User
     public string Email { get; set; } = string.Empty;
     public virtual ICollection<UserRole> Roles { get; set; }
     public string Password { get; set; } = string.Empty;
-    public string ProfileImagePath { get; set; } = string.Empty;
+    public string? ProfileImagePath { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }
