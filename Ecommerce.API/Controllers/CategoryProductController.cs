@@ -19,14 +19,13 @@ public class CategoryProductController : ControllerBase
         this.Logger = logger;
     }
 
-    [Authorize(Roles = "ADMIN")]
+    // [Authorize(Roles = "ADMIN")]
     [HttpPost("create/newCategoryProduct")]
     public async Task<ActionResult> CrateNewCategoryProduct(CategoryProductDataRegister categoryProductDataRegister)
     {
         try
         {
-            var newCategoryProductCreated =
-                await this._categoryProductService.AddNewCategoryProduct_ServiceAsync(categoryProductDataRegister);
+            var newCategoryProductCreated = await this._categoryProductService.AddNewCategoryProduct_ServiceAsync(categoryProductDataRegister);
 
             if (newCategoryProductCreated is not null)
             {
@@ -40,7 +39,7 @@ public class CategoryProductController : ControllerBase
             return BadRequest($"Error -> {exception.Message}");
         }
 
-        return BadRequest($"The product {categoryProductDataRegister.Name} could not be created!");
+        return BadRequest($"The category product '{categoryProductDataRegister.Name}' could not be created!");
     }
 
     [HttpGet("get/allCategoriesProduct")]
@@ -70,22 +69,23 @@ public class CategoryProductController : ControllerBase
         return BadRequest(new { Success = false, Message = "Product category list could not be returned!" });
     }
 
-    [HttpDelete("delete/categoryByName/{categoryName}")]
-    public async Task<ActionResult> DeleteCategoryProductByName([FromRoute] string categoryName){
+    [HttpDelete("delete/categoryProductByName/{categoryName}")]
+    public async Task<ActionResult> DeleteCategoryProductByName([FromRoute] string categoryName)
+    {
 
-        // System.Console.WriteLine("name" + name);
-        var removedCategoryName = await this._categoryProductService.DeleteCategoryProductByName_ServiceAsync(categoryName);
-        
         try
         {
-            if(removedCategoryName is not null){
+            var removedCategoryName = await this._categoryProductService.DeleteCategoryProductByName_ServiceAsync(categoryName);
+
+            if (removedCategoryName is not null)
+            {
                 this.Logger.LogInformation($"Category {removedCategoryName.Name} was removed from DB");
                 return Ok(new { Success = true, CategoryRemoved = removedCategoryName });
             }
         }
         catch (System.Exception exception)
         {
-          
+
             Console.WriteLine("Error -> " + exception.Message);
             this.Logger.LogInformation(exception.Message.ToString());
         }

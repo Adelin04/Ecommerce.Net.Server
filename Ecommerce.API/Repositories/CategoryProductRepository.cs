@@ -32,9 +32,7 @@ public class CategoryProductRepository : ICategoryProductRepository
     {
         var allCategories = this._context.CategoryProducts.ToListAsync();
 
-        if (allCategories is not null)
-            return allCategories;
-        return null;
+        return allCategories;
     }
 
     public async Task<CategoryProduct> GetCategoryProductByIdAsync(long id)
@@ -42,9 +40,7 @@ public class CategoryProductRepository : ICategoryProductRepository
         var findCategoryProductById =
             await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct => categoryProduct.Id == id);
 
-        if (findCategoryProductById is not null)
-            return findCategoryProductById;
-        return null;
+        return findCategoryProductById;
     }
 
     public async Task<CategoryProduct> GetCategoryProductByNameAsync(string nameCategory)
@@ -54,10 +50,23 @@ public class CategoryProductRepository : ICategoryProductRepository
                 categoryProduct.Name == nameCategory);
 
 
-        if (findCategoryProductByName is not null)
-            return findCategoryProductByName;
-        return null;
+        return findCategoryProductByName;
     }
 
+    public async Task<CategoryProduct> DeleteCategoryProductByNameAsync(string nameCategory)
+    {
+        var existCategoryProductByName = await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct => categoryProduct.Name == nameCategory);
 
+        if (existCategoryProductByName is not null)
+        {
+            var removedCategoryName = this._context.CategoryProducts.Remove(existCategoryProductByName);
+
+            if (removedCategoryName.State is EntityState.Deleted)
+            {
+                await this._context.SaveChangesAsync();
+            }
+        }
+
+        return existCategoryProductByName;
+    }
 }

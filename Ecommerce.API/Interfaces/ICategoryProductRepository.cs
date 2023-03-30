@@ -8,4 +8,5 @@ public interface ICategoryProductRepository
     Task<List<CategoryProduct>> GetAllCategoriesProductAsync();
     Task<CategoryProduct> GetCategoryProductByIdAsync(long id);
     Task<CategoryProduct> GetCategoryProductByNameAsync(string nameCategory);
+    Task<CategoryProduct> DeleteCategoryProductByNameAsync(string nameCategory);
 }

@@ -2,6 +2,7 @@
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Ecommerce.API.Repositories;
+using NuGet.Protocol;
 
 namespace Ecommerce.API.Services;
 
@@ -14,18 +15,18 @@ public class CategoryProductService
         this._categoryProductRepository = categoryProductRepository;
     }
 
-    public async Task<CategoryProduct> AddNewCategoryProduct_ServiceAsync(
-        CategoryProductDataRegister categoryProductDataRegister)
+    public async Task<CategoryProduct> AddNewCategoryProduct_ServiceAsync(CategoryProductDataRegister categoryProductDataRegister)
     {
+        var existCategoryProduct = await this._categoryProductRepository.GetCategoryProductByNameAsync(categoryProductDataRegister.Name);
         CategoryProduct newCategoryProduct = null;
 
-        if (categoryProductDataRegister is null)
-            return null;
+        if (existCategoryProduct is null)
+        {
+            newCategoryProduct = new CategoryProduct();
+            newCategoryProduct.Name = categoryProductDataRegister.Name;
 
-        newCategoryProduct = new CategoryProduct();
-        newCategoryProduct.Name = categoryProductDataRegister.Name;
-        var newCategoryProductCreated = await
-            this._categoryProductRepository.AddNewCategoryProductAsync(newCategoryProduct);
+            var newCategoryProductCreated = await this._categoryProductRepository.AddNewCategoryProductAsync(newCategoryProduct);
+        }
 
         return newCategoryProduct;
     }
@@ -34,17 +35,13 @@ public class CategoryProductService
     {
         var allCategories = await this._categoryProductRepository.GetAllCategoriesProductAsync();
 
-        if (allCategories is not null)
-            return allCategories;
-        return null;
+        return allCategories;
     }
 
     public async Task<CategoryProduct> DeleteCategoryProductByName_ServiceAsync(string nameCategory)
     {
-        var removedCategoryProduct = await this._categoryProductRepository.GetCategoryProductByNameAsync(nameCategory);
+        var removedCategoryProduct = await this._categoryProductRepository.DeleteCategoryProductByNameAsync(nameCategory);
 
-        if (removedCategoryProduct is not null)
-            return removedCategoryProduct;
-        return null;
+        return removedCategoryProduct;
     }
 }
