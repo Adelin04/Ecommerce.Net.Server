@@ -19,7 +19,7 @@ public class CategoryProductController : ControllerBase
         this.Logger = logger;
     }
 
-    // [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN")]
     [HttpPost("create/newCategoryProduct")]
     public async Task<ActionResult> CrateNewCategoryProduct(CategoryProductDataRegister categoryProductDataRegister)
     {

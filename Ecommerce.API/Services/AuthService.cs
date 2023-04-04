@@ -11,17 +11,15 @@ namespace Ecommerce.API.Services;
 public class AuthService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IAuthRepository _authRepository;
     private readonly IRoleRepository _roleRepository;
     private readonly IUserRoleRepository _userRoleRepository;
     private readonly IConfiguration _configuration;
 
-    public AuthService(IUserRepository userRepository, IAuthRepository authRepository, IRoleRepository roleRepository,
+    public AuthService(IUserRepository userRepository, IRoleRepository roleRepository,
         IUserRoleRepository userRoleRepository,
         IConfiguration configuration)
     {
         this._userRepository = userRepository;
-        this._authRepository = authRepository;
         this._roleRepository = roleRepository;
         this._userRoleRepository = userRoleRepository;
         this._configuration = configuration;
@@ -31,12 +29,11 @@ public class AuthService
     public async Task<User> Register(UserDataRegister candidateUser)
     {
         string DEFAULT_ROLE = "USER";
-        User newUser = null;
+        User? newUser = null;
 
         var defaultRole = await this._roleRepository.GetRoleByNameAsync(DEFAULT_ROLE);
         var existingUser = await this._userRepository.GetUserByEmailAsync(candidateUser.Email);
 
-        System.Console.WriteLine("existingUser --> " + existingUser);
 
         if (existingUser is null && defaultRole is not null)
         {
@@ -46,7 +43,7 @@ public class AuthService
             newUser.Email = candidateUser.Email;
             newUser.Password = BCrypt.Net.BCrypt.HashPassword(candidateUser.Password);
 
-            var userCreated = await this._authRepository.CreateUserAsync(newUser);
+            var userCreated = await this._userRepository.SaveNewUser(newUser);
 
             if (userCreated.Id.ToString() is not null)
                 await this._userRoleRepository.AddNewUserRole(userCreated.Id, defaultRole.Id);

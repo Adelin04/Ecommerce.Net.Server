@@ -5,6 +5,7 @@ namespace Ecommerce.API.Interfaces;
 
 public interface IUserRepository
 {
+    Task<User> SaveNewUser(User newUser);
     Task<List<User>> GetAllUsersAsync();
     Task<User> GetUserByEmailAsync(string email);
     Task<User> GetUserByIdAsync(long id);

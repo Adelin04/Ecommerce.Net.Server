@@ -20,7 +20,7 @@ public class ProductController : ControllerBase
         this.Logger = logger;
     }
 
-    // [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN")]
     [Consumes("multipart/form-data")]
     [HttpPost("create/newProduct")]
     public async Task<ActionResult> CreateNewProduct([FromForm] ProductDataRegister productDataRegister)
@@ -115,7 +115,7 @@ public class ProductController : ControllerBase
             { Success = false, Message = $"The product {productDataUpdate.Name} could not be updated!" });
     }
 
-    // [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN")]
     [HttpDelete("delete/productById/{id}")]
     public async Task<ActionResult> DeleteProductById([FromRoute] long id)
     {

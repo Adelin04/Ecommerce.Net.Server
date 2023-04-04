@@ -16,6 +16,19 @@ public class UserRepository : IUserRepository
         this._context = context;
     }
 
+    public async Task<User> SaveNewUser(User newUser)
+    {
+        var newUserCreated = await this._context.Users.AddAsync(newUser);
+
+        if (newUserCreated.State == EntityState.Added)
+        {
+            await this._context.SaveChangesAsync(true);
+            return newUser;
+        }
+
+        return null;
+    }
+
 
     public async Task<List<User>> GetAllUsersAsync()
     {
@@ -71,4 +84,7 @@ public class UserRepository : IUserRepository
 
         return null;
     }
+
+
+
 }
