@@ -68,11 +68,12 @@ public class ProductService
                 var verifySizeExist = findSizesProduct.Find(item => item.Name == size.Size);
 
                 listOfSize.Add(new SizeStock
-                    { Stock = size.Stock, FK_ProductId = newProductCreated.Id, FK_SizeId = verifySizeExist.Id });
+                { Stock = size.Stock, FK_ProductId = newProductCreated.Id, FK_SizeId = verifySizeExist.Id });
             }
 
         var newListOfSizeStockRegistered = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(listOfSize);
 
+        // submit new product photos to aws S3
         if (newListOfSizeStockRegistered is not null)
             foreach (var file in productDataRegister.Files)
             {
