@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
             var userCreated = await this._authService.Register(userDataRegister);
 
             if (userCreated is not null)
-                return Ok(new { Success = true, UserCreated = userCreated.Password });
+                return Ok(new { Success = true, UserCreated = userCreated });
         }
         catch (Exception exception)
         {

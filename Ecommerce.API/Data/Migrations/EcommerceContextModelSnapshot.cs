@@ -22,6 +22,48 @@ namespace Ecommerce.API.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("BuyerId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("BasketId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketItems");
+                });
+
             modelBuilder.Entity("Ecommerce.API.Models.CategoryProduct", b =>
                 {
                     b.Property<long>("Id")
@@ -227,6 +269,21 @@ namespace Ecommerce.API.Data.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>
+                {
+                    b.HasOne("Ecommerce.API.Models.Basket", null)
+                        .WithMany("Items")
+                        .HasForeignKey("BasketId");
+
+                    b.HasOne("Ecommerce.API.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
                 {
                     b.HasOne("Ecommerce.API.Models.CategoryProduct", "CategoryProduct")
@@ -285,6 +342,11 @@ namespace Ecommerce.API.Data.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>

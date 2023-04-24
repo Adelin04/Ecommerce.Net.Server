@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Ecommerce.API.Contracts;
+using Ecommerce.API.Models;
+using Ecommerce.API.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Ecommerce.API.Controllers;
+
+[Authorize(Roles = "ADMIN")]
+[Route("api/[Controller]/v1/")]
+[ApiController]
+public class BasketController : ControllerBase
+{
+
+    private readonly BasketServices _basketServices;
+    private readonly ILogger<BasketController> _logger;
+
+    public BasketController(BasketServices basketServices, ILogger<BasketController> logger)
+    {
+        this._basketServices = basketServices;
+        this._logger = logger;
+    }
+
+    [HttpGet("get/allBaskets")]
+    public async Task<ActionResult> GetAllBaskets()
+    {
+        try
+        {
+            var listOfBaskets = await this._basketServices.GetAllBaskets_ServiceAsync();
+
+            if (listOfBaskets is not null)
+            {
+                this._logger.LogInformation($"Returned baskets list");
+                return Ok(new { Success = true, Baskets = listOfBaskets, Count = listOfBaskets.Count });
+            }
+
+            if (listOfBaskets.Count < 1)
+            {
+                this._logger.LogInformation($"Returned baskets list");
+                return Ok(new { Message = $"Baskets list is empty -> {listOfBaskets.Count}" });
+            }
+        }
+        catch (Exception exception)
+        {
+            this._logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Error = exception.Message });
+        }
+
+        return BadRequest(new { Success = false, Message = "Baskets list could not be returned!" });
+    }
+
+    [HttpPost("add/newBasket")]
+    public async Task<ActionResult> AddNewBasket(RequestRegisterBasket requestRegisterBasket)
+    {
+
+        try
+        {
+            var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(new Basket() { BuyerId = requestRegisterBasket.BuyerId });
+
+            if (newBasketCrated is not null)
+            {
+                this._logger.LogInformation($"New basket successfully created");
+                return Ok(new { Success = true, NewBasketCreated = newBasketCrated });
+            }
+
+        }
+        catch (System.Exception exception)
+        {
+
+            this._logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Error = exception.Message });
+        }
+        return BadRequest(new { Success = false, Message = "Basket could not be created!" });
+    }
+
+}

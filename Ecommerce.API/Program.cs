@@ -75,6 +75,8 @@ builder.Services.AddTransient<ICategoryProductRepository, CategoryProductReposit
 builder.Services.AddTransient<ISizeRepository, SizeRepository>();
 builder.Services.AddTransient<ISizeStockRepository, SizeStockRepository>();
 builder.Services.AddTransient<IProductImagesRepository, ProductImagesRepository>();
+builder.Services.AddTransient<IBasketRepository, BasketRepository>();
+builder.Services.AddTransient<IBasketItemRepository, BasketItemRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
@@ -84,6 +86,8 @@ builder.Services.AddScoped<ProductImagesService>();
 builder.Services.AddScoped<CategoryProductService>();
 builder.Services.AddScoped<SizeService>();
 builder.Services.AddScoped<AwsS3StorageImagesService>();
+builder.Services.AddScoped<BasketServices>();
+builder.Services.AddScoped<BasketItemsService>();
 
 
 var app = builder.Build();
