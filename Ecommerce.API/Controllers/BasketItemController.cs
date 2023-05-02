@@ -30,7 +30,7 @@ public class BasketItemController : ControllerBase
     [HttpPost("add/newBasketItem")]
     public async Task<ActionResult> AddNewBasketItem(RequestRegisterBasketItem requestRegisterBasketItem)
     {
-        try
+       /*  try
         {
             var newBasketItemCreated = await this._basketItemsService.AddNewBasketItem_ServiceAsync(new BasketItems() { Quantity = requestRegisterBasketItem.Quantity, ProductId = requestRegisterBasketItem.ProductId });
             var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(new Basket() { BuyerId = requestRegisterBasketItem.BuyerId });
@@ -46,7 +46,7 @@ public class BasketItemController : ControllerBase
             Console.WriteLine("Error -> " + exception.Message);
             this._logger.LogInformation("Error -> " + exception.Message);
             return BadRequest(new { Error = exception.Message });
-        }
+        } */
 
         return BadRequest(new { Success = false, Message = "Something went wrong!" });
     }

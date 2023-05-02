@@ -1,16 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Amazon.S3.Model;
 using Ecommerce.API.Contracts;
 using Ecommerce.API.Models;
 using Ecommerce.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using NuGet.Protocol;
 
 namespace Ecommerce.API.Controllers;
 
-[Authorize(Roles = "ADMIN")]
+// [Authorize(Roles = "ADMIN")]
 [Route("api/[Controller]/v1/")]
 [ApiController]
 public class BasketController : ControllerBase
@@ -54,12 +59,11 @@ public class BasketController : ControllerBase
     }
 
     [HttpPost("add/newBasket")]
-    public async Task<ActionResult> AddNewBasket(RequestRegisterBasket requestRegisterBasket)
+    public async Task<ActionResult> AddNewBasket([FromBody] RequestRegisterBasket requestRegisterBasket)
     {
-
         try
         {
-            var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(new Basket() { BuyerId = requestRegisterBasket.BuyerId });
+            var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(requestRegisterBasket);
 
             if (newBasketCrated is not null)
             {
