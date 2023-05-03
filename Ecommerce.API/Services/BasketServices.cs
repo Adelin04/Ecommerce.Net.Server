@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Microsoft.Extensions.ObjectPool;
+using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
 
 namespace Ecommerce.API.Services;
@@ -13,29 +15,37 @@ namespace Ecommerce.API.Services;
 public class BasketServices
 {
     private readonly IBasketRepository _basketRepository;
+    private readonly IBasketItemRepository _basketItemRepository;
     private readonly IUserRepository _userRepository;
-    public BasketServices(IBasketRepository basketRepository, IUserRepository userRepository)
+    public BasketServices(IBasketRepository basketRepository, IBasketItemRepository basketItemRepository, IUserRepository userRepository)
     {
         this._basketRepository = basketRepository;
+        this._basketItemRepository = basketItemRepository;
         this._userRepository = userRepository;
     }
 
     public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
         // i'm working now here
-        Dictionary<object, object> products = new Dictionary<object, object>();
-        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
+        List<BasketItems> products = new();
+        Dictionary<object, object> listProd = new();
 
+        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail) is User;
 
-        foreach (var items in requestRegisterBasket.products)
+        if (existUser)
         {
-            foreach (var item in items)
+            foreach (var items in requestRegisterBasket.products)
             {
-                products.Add(item.Key, item.Value);
+                foreach (var item in items)
+                {
+
+                    System.Console.WriteLine(item.Value);
+
+                }
             }
         }
+
         // return await this._repository.AddNewBasket(newBasket);
-        System.Console.WriteLine("products------> " + products);
         return null;
     }
 
