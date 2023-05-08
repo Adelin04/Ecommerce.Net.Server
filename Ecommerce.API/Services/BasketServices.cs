@@ -27,33 +27,7 @@ public class BasketServices
 
     public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
-
-        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
-
-        foreach (var product in requestRegisterBasket.products)
-        {
-            // System.Console.WriteLine(product["productId"]);
-            // System.Console.WriteLine("\n");
-            // System.Console.WriteLine("quantitySize --------------> " + product["quantitySize"]);
-
-                System.Console.WriteLine(product[0]);
-            // foreach (var item in product)
-            // {
-            // }
-
-            // await this._basketItemRepository.AddNewBasketItem(new BasketItems()
-            // { ProductId = (long)products["productId"], Quantity = products["quantitySize"] });
-
-            System.Console.WriteLine("next obj \n");
-        }
-
-
-
-        // if (existUser is not null)
-        // {
-        // }
-
-     
+        //
         return null;
     }
 
