@@ -7,6 +7,7 @@ using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Microsoft.Extensions.ObjectPool;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
 
@@ -26,26 +27,33 @@ public class BasketServices
 
     public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
-        // i'm working now here
-        List<BasketItems> products = new();
-        Dictionary<object, object> listProd = new();
 
-        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail) is User;
+        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
 
-        if (existUser)
+        foreach (var product in requestRegisterBasket.products)
         {
-            foreach (var items in requestRegisterBasket.products)
-            {
-                foreach (var item in items)
-                {
+            // System.Console.WriteLine(product["productId"]);
+            // System.Console.WriteLine("\n");
+            // System.Console.WriteLine("quantitySize --------------> " + product["quantitySize"]);
 
-                    System.Console.WriteLine(item.Value);
+                System.Console.WriteLine(product[0]);
+            // foreach (var item in product)
+            // {
+            // }
 
-                }
-            }
+            // await this._basketItemRepository.AddNewBasketItem(new BasketItems()
+            // { ProductId = (long)products["productId"], Quantity = products["quantitySize"] });
+
+            System.Console.WriteLine("next obj \n");
         }
 
-        // return await this._repository.AddNewBasket(newBasket);
+
+
+        // if (existUser is not null)
+        // {
+        // }
+
+     
         return null;
     }
 
