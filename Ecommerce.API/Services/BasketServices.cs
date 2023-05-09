@@ -42,8 +42,6 @@ public class BasketServices
         {
             foreach (var quntitySize in (JArray)product["quantitySize"])
             {
-                System.Console.WriteLine("quantity --------------> " + quntitySize["quantity"]);
-
                 await this._basketItemRepository.AddNewBasketItem(new BasketItems()
                 { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = newBasketCreated.Id });
             }
