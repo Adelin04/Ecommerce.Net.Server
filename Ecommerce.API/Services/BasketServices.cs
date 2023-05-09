@@ -7,8 +7,11 @@ using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Microsoft.Extensions.ObjectPool;
+using Microsoft.Extensions.WebEncoders.Testing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using NuGet.Protocol;
 
 namespace Ecommerce.API.Services;
@@ -27,8 +30,26 @@ public class BasketServices
 
     public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
-        //
-        return null;
+        var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
+
+        if (existUser is null) return null;
+
+        var newBasketCreated = await this._basketRepository.AddNewBasket(new Basket() { BuyerId = existUser.Id });
+
+        if (newBasketCreated is null) return null;
+
+        foreach (var product in requestRegisterBasket.products)
+        {
+            foreach (var quntitySize in (JArray)product["quantitySize"])
+            {
+                System.Console.WriteLine("quantity --------------> " + quntitySize["quantity"]);
+
+                await this._basketItemRepository.AddNewBasketItem(new BasketItems()
+                { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = newBasketCreated.Id });
+            }
+        }
+
+        return newBasketCreated;
     }
 
     public async Task<List<Basket>> GetAllBaskets_ServiceAsync()

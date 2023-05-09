@@ -46,7 +46,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("BasketId")
+                    b.Property<long>("BasketId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("ProductId")
@@ -275,15 +275,19 @@ namespace Ecommerce.API.Data.Migrations
 
             modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>
                 {
-                    b.HasOne("Ecommerce.API.Models.Basket", null)
+                    b.HasOne("Ecommerce.API.Models.Basket", "Basket")
                         .WithMany("Items")
-                        .HasForeignKey("BasketId");
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Ecommerce.API.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Basket");
 
                     b.Navigation("Product");
                 });
