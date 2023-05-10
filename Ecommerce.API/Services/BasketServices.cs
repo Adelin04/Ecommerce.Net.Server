@@ -28,30 +28,39 @@ public class BasketServices
         this._userRepository = userRepository;
     }
 
-    public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
+    public async Task<Basket?> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
         var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
 
-        if (existUser is null) return null;
+        // if (existUser is null) return null;
 
-        var newBasketCreated = await this._basketRepository.AddNewBasket(new Basket() { BuyerId = existUser.Id });
+        // var newBasketCreated = await this._basketRepository.AddNewBasket(new Basket() { BuyerId = existUser.Id });
 
-        if (newBasketCreated is null) return null;
+        // if (newBasketCreated is null) return null;
 
-        foreach (var product in requestRegisterBasket.products)
-        {
-            foreach (var quntitySize in (JArray)product["quantitySize"])
-            {
-                await this._basketItemRepository.AddNewBasketItem(new BasketItems()
-                { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = newBasketCreated.Id });
-            }
-        }
+        // foreach (var product in requestRegisterBasket.products)
+        // {
+        //     foreach (var quntitySize in (JArray)product["quantitySize"])
+        //     {
+        //         await this._basketItemRepository.AddNewBasketItem(new BasketItems()
+        //         { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = newBasketCreated.Id });
+        //     }
+        // }
 
-        return newBasketCreated;
+        return null/* newBasketCreated */;
     }
 
     public async Task<List<Basket>> GetAllBaskets_ServiceAsync()
     {
         return await this._basketRepository.GetAllBasket();
+    }
+    public async Task<Basket?> GetBasketByUserEmail_ServiceAsync(string email)
+    {
+        var userByEmail = await this._userRepository.GetUserByEmailAsync(email);
+
+System.Console.WriteLine("-------------------- " + userByEmail.Id);
+        if (userByEmail is null)
+            return null;
+        return await this._basketRepository.GetBasketByUserId(userByEmail.Id);
     }
 }

@@ -15,7 +15,7 @@ public class CategoryProductRepository : ICategoryProductRepository
         this._context = context;
     }
 
-    public async Task<CategoryProduct> AddNewCategoryProductAsync(CategoryProduct newCategoryProduct)
+    public async Task<CategoryProduct?> AddNewCategoryProductAsync(CategoryProduct newCategoryProduct)
     {
         var newCategoryProductCreated = await this._context.CategoryProducts.AddAsync(newCategoryProduct);
 
@@ -28,32 +28,15 @@ public class CategoryProductRepository : ICategoryProductRepository
         return null;
     }
 
-    public Task<List<CategoryProduct>> GetAllCategoriesProductAsync()
-    {
-        var allCategories = this._context.CategoryProducts.ToListAsync();
+    public async Task<List<CategoryProduct>> GetAllCategoriesProductAsync() => await this._context.CategoryProducts.ToListAsync();
 
-        return allCategories;
-    }
-
-    public async Task<CategoryProduct> GetCategoryProductByIdAsync(long id)
-    {
-        var findCategoryProductById =
+    public async Task<CategoryProduct?> GetCategoryProductByIdAsync(long id) =>
             await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct => categoryProduct.Id == id);
 
-        return findCategoryProductById;
-    }
-
-    public async Task<CategoryProduct> GetCategoryProductByNameAsync(string nameCategory)
-    {
-        var findCategoryProductByName =
-            await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct =>
+    public async Task<CategoryProduct?> GetCategoryProductByNameAsync(string nameCategory) => await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct =>
                 categoryProduct.Name == nameCategory);
 
-
-        return findCategoryProductByName;
-    }
-
-    public async Task<CategoryProduct> DeleteCategoryProductByNameAsync(string nameCategory)
+    public async Task<CategoryProduct?> DeleteCategoryProductByNameAsync(string nameCategory)
     {
         var existCategoryProductByName = await this._context.CategoryProducts.FirstOrDefaultAsync(categoryProduct => categoryProduct.Name == nameCategory);
 

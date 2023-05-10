@@ -13,15 +13,18 @@ public class AuthService
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
     private readonly IUserRoleRepository _userRoleRepository;
+    private readonly IBasketRepository _basketRepository;
     private readonly IConfiguration _configuration;
 
     public AuthService(IUserRepository userRepository, IRoleRepository roleRepository,
         IUserRoleRepository userRoleRepository,
+        IBasketRepository basketRepository,
         IConfiguration configuration)
     {
         this._userRepository = userRepository;
         this._roleRepository = roleRepository;
         this._userRoleRepository = userRoleRepository;
+        this._basketRepository = basketRepository;
         this._configuration = configuration;
     }
 
@@ -53,10 +56,11 @@ public class AuthService
     }
 
 
-    public async Task<string> Login(UserDataLogin userDataLogin)
+    public async Task<List<object>> Login(UserDataLogin userDataLogin)
     {
         string token = null;
         var existingUser = await this._userRepository.GetUserByEmailAsync(userDataLogin.Email);
+        var basketExitByUser = await this._basketRepository.GetBasketByUserId(existingUser.Id);
 
         if (existingUser is not null)
         {
@@ -66,7 +70,7 @@ public class AuthService
                 token = GenerateToken(existingUser);
         }
 
-        return token;
+        return new List<object>() { token, basketExitByUser };
     }
 
     private string GenerateToken(User user)

@@ -43,10 +43,10 @@ public class AuthController : ControllerBase
 
         try
         {
-            var token = await this._authService.Login(userDataLogin);
+            var response = await this._authService.Login(userDataLogin);
 
-            if (token is not null)
-                return Ok(new { Success = true, Token = token });
+            if (response[0] is not null)
+                return Ok(new { Success = true, Token = response[0], BasketByUser = response[1] });
             return BadRequest(new { Success = false, Message = "The email or password is wrong!" });
         }
         catch (Exception exception)

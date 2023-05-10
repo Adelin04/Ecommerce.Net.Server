@@ -15,7 +15,6 @@ using NuGet.Protocol;
 
 namespace Ecommerce.API.Controllers;
 
-// [Authorize(Roles = "ADMIN")]
 [Route("api/[Controller]/v1/")]
 [ApiController]
 public class BasketController : ControllerBase
@@ -30,6 +29,7 @@ public class BasketController : ControllerBase
         this._logger = logger;
     }
 
+    [Authorize(Roles = "ADMIN")]
     [HttpGet("get/allBaskets")]
     public async Task<ActionResult> GetAllBaskets()
     {
@@ -74,11 +74,34 @@ public class BasketController : ControllerBase
         }
         catch (System.Exception exception)
         {
-
             this._logger.LogInformation("Error -> " + exception.Message);
             return BadRequest(new { Error = exception.Message });
         }
         return BadRequest(new { Success = false, Message = "Basket could not be created!" });
+    }
+
+    [HttpPost("get/basketByUserEmail/{userEmail}")]
+    public async Task<ActionResult> GetBasketByUserEmail([FromRoute] string userEmail)
+    {
+
+        try
+        {
+            var basketByUserEmail = await this._basketServices.GetBasketByUserEmail_ServiceAsync(userEmail);
+            System.Console.WriteLine("---------------------> " + basketByUserEmail.ToJson());
+            if (basketByUserEmail is not null)
+            {
+                this._logger.LogInformation("The basket given by the user id");
+                return Ok(new { Success = true, BasketByUserEmail = basketByUserEmail });
+            }
+
+        }
+        catch (System.Exception exception)
+        {
+            this._logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Error = exception.Message });
+
+        }
+        return BadRequest(new { Success = false, Message = "The Basket could not be found!" });
     }
 
 }

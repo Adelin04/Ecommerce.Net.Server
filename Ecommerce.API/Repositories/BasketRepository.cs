@@ -18,7 +18,7 @@ public class BasketRepository : IBasketRepository
         this._context = context;
     }
 
-    public async Task<Basket> AddNewBasket(Basket newBasket)
+    public async Task<Basket?> AddNewBasket(Basket newBasket)
     {
         var newBasketCrated = await this._context.Baskets.AddAsync(newBasket);
 
@@ -31,22 +31,22 @@ public class BasketRepository : IBasketRepository
         return null;
     }
 
-    public Task<Basket> DeletBasketById(long id)
+    public async Task<Basket?> DeletBasketById(long id)
     {
-        throw new NotImplementedException();
-    }
+        var basketToDelete = await this._context.Baskets.FirstOrDefaultAsync(basket => basket.Id == id);
 
-    public Task<List<Basket>> GetAllBasket()
-    {
-        var allBaskets = this._context.Baskets.ToListAsync();
+        if (basketToDelete is not null)
+        {
+            var removedBasketById = this._context.Baskets.Remove(basketToDelete);
 
-        return allBaskets;
-    }
+            await this._context.SaveChangesAsync();
+        }
 
-    public Task<Basket> GetBasketById(long id)
-    {
-        throw new NotImplementedException();
+        return basketToDelete;
     }
+    public async Task<List<Basket>> GetAllBasket() => await this._context.Baskets.ToListAsync();
+
+    public async Task<Basket?> GetBasketByUserId(long id) => await this._context.Baskets.FirstOrDefaultAsync(basket => basket.BuyerId == id);
 
     public Task<Basket> UpdateBasketById(long id)
     {

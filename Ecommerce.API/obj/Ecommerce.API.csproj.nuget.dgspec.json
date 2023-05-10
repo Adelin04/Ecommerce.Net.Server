@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {}
+    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {}
   },
   "projects": {
-    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {
+    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+        "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
         "projectName": "Ecommerce.API",
-        "projectPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+        "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
         "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-        "outputPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
+        "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"
