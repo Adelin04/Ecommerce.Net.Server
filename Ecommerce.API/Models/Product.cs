@@ -31,6 +31,7 @@ public class Product
     public virtual long CategoryProductId { get; set; }
     public virtual CategoryProduct CategoryProduct { get; set; }
 
+
     // Relationship SizeStock
     public virtual ICollection<SizeStock> SizeStocks { get; set; }
     public virtual ICollection<ProductImages> ProductImages { get; set; }

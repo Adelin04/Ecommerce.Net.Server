@@ -46,7 +46,7 @@ public class BasketRepository : IBasketRepository
     }
     public async Task<List<Basket>> GetAllBasket() => await this._context.Baskets.ToListAsync();
 
-    public async Task<Basket?> GetBasketByUserId(long id) => await this._context.Baskets.FirstOrDefaultAsync(basket => basket.BuyerId == id);
+    public async Task<Basket?> GetBasketByUserId(long id) => await this._context.Baskets.Include(item => item.Items).FirstOrDefaultAsync(basket => basket.BuyerId == id);
 
     public Task<Basket> UpdateBasketById(long id)
     {

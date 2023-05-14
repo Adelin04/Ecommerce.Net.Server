@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecommerce.API.Data.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    [Migration("20230509162941_Updated_BasketItems")]
-    partial class Updated_BasketItems
+    [Migration("20230511171428_Updated_BasketItems_Table")]
+    partial class Updated_BasketItems_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

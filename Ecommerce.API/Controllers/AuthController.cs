@@ -33,7 +33,6 @@ public class AuthController : ControllerBase
             this.Logger.LogInformation("Error -> " + exception.Message);
             return BadRequest(new { Error = exception.Message });
         }
-
         return BadRequest(new { Success = false, Message = "Users already exist!" });
     }
 

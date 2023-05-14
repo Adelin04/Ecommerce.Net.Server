@@ -28,25 +28,18 @@ public class ProductRepository : IProductRepository
         return null;
     }
 
-    public async Task<Product> GetProductByIdAsync(long id)
+    public async Task<Product?> GetProductByIdAsync(long id)
     {
-        var foundProductById = await this._context.Products.Include(product => product.CategoryProduct)
-            .Include(product => product.ProductImages).Include(product => product.SizeStocks)
-            .ThenInclude(sizeStock => sizeStock.Size).FirstOrDefaultAsync(product => product.Id == id);
+        return await this._context.Products.Include(product => product.CategoryProduct)
+             .Include(product => product.ProductImages).Include(product => product.SizeStocks)
+             .ThenInclude(sizeStock => sizeStock.Size).FirstOrDefaultAsync(product => product.Id == id);
 
-        if (foundProductById is not null)
-            return foundProductById;
-        return null;
     }
 
-    public async Task<List<Product>> GetAllProductsAsync()
+    public async Task<List<Product>?> GetAllProductsAsync()
     {
-        var listAllProducts = await this._context.Products.Include(categoryProduct => categoryProduct.CategoryProduct)
-            .Include(product => product.ProductImages).Include(product => product.SizeStocks).ToListAsync();
-
-        if (listAllProducts is not null)
-            return listAllProducts;
-        return null;
+        return await this._context.Products.Include(categoryProduct => categoryProduct.CategoryProduct)
+             .Include(product => product.ProductImages).Include(product => product.SizeStocks).ToListAsync();
     }
 
     public async Task<Product> DeleteProductByIdAsync(long id)

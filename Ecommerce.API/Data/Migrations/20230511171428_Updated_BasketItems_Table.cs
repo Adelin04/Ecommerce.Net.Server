@@ -4,7 +4,7 @@
 
 namespace Ecommerce.API.Data.Migrations
 {
-    public partial class Updated_BasketItems : Migration
+    public partial class Updated_BasketItems_Table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

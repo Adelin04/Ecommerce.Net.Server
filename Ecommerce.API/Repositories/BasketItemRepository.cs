@@ -34,4 +34,7 @@ public class BasketItemRepository : IBasketItemRepository
     {
         return await this._context.BasketItems.ToListAsync();
     }
+
+    public async Task<List<BasketItems>?> GetBasketItemsByUserId(long id) => await this._context.BasketItems.Include(item => item.Id == id).ToListAsync();
+    
 }

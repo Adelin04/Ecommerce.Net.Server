@@ -10,5 +10,7 @@ namespace Ecommerce.API.Interfaces
     {
         public Task<BasketItems> AddNewBasketItem(BasketItems newBasketItem);
         public Task<List<BasketItems>> GetAllBasketItems();
+
+        public Task<List<BasketItems>> GetBasketItemsByUserId(long id);
     }
 }

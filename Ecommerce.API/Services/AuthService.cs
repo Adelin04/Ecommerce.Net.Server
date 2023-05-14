@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Ecommerce.API.Contracts;
@@ -60,7 +61,7 @@ public class AuthService
     {
         string token = null;
         var existingUser = await this._userRepository.GetUserByEmailAsync(userDataLogin.Email);
-        var basketExitByUser = await this._basketRepository.GetBasketByUserId(existingUser.Id);
+        var basketExistByUser = await this._basketRepository.GetBasketByUserId(existingUser.Id);
 
         if (existingUser is not null)
         {
@@ -68,9 +69,10 @@ public class AuthService
 
             if (matchPassword)
                 token = GenerateToken(existingUser);
+
         }
 
-        return new List<object>() { token, basketExitByUser };
+        return new List<object>() { token, basketExistByUser };
     }
 
     private string GenerateToken(User user)
@@ -102,7 +104,7 @@ public class AuthService
 
         foreach (var role in user.Roles)
         {
-            claimsList.Add((new Claim(ClaimTypes.Role, role.Role.Name.ToString())));
+            claimsList.Add(new Claim(ClaimTypes.Role, role.Role.Name));
         }
 
         return claimsList;

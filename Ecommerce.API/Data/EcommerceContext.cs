@@ -74,6 +74,11 @@ public class EcommerceContext : DbContext
                 .HasForeignKey(productImage => productImage.FK_ProductId);
         });
 
-        modelBuilder.Entity<Basket>(entity => entity.HasMany<BasketItems>(basket => basket.Items));
+        modelBuilder.Entity<Basket>(entity =>
+        entity.HasMany<BasketItems>(basket => basket.Items)
+        .WithOne(basket => basket.Basket)
+        .HasForeignKey(basketItems => basketItems.BasketId)
+        .OnDelete(DeleteBehavior.Cascade)
+        );
     }
 }

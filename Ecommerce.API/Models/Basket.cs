@@ -10,4 +10,5 @@ public class Basket
     public long Id { get; set; }
     public long BuyerId { get; set; }
     public List<BasketItems> Items { get; set; } = new();
+
 }
