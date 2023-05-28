@@ -30,11 +30,26 @@ public class BasketItemRepository : IBasketItemRepository
         return null;
     }
 
+
     public async Task<List<BasketItems>> GetAllBasketItems()
     {
         return await this._context.BasketItems.ToListAsync();
     }
 
     public async Task<List<BasketItems>?> GetBasketItemsByUserId(long id) => await this._context.BasketItems.Include(item => item.Id == id).ToListAsync();
-    
+
+
+    public async Task<BasketItems?> GetBasketItemsById(long id) => await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.Id == id);
+    public async Task<BasketItems> DeleteBasketItemsById(long id)
+    {
+
+        var basketItemToRemove = await GetBasketItemsById(id);
+
+        if (basketItemToRemove is not null)
+        {
+            this._context.BasketItems.Remove(basketItemToRemove);
+            await this._context.SaveChangesAsync();
+        }
+        return basketItemToRemove;
+    }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.API.Controllers;
 
-[Authorize(Roles = "ADMIN")]
+// [Authorize(Roles = "ADMIN")]
 [Route("api/[Controller]/v1/")]
 [ApiController]
 public class BasketItemController : ControllerBase
@@ -30,23 +30,23 @@ public class BasketItemController : ControllerBase
     [HttpPost("add/newBasketItem")]
     public async Task<ActionResult> AddNewBasketItem(RequestRegisterBasketItem requestRegisterBasketItem)
     {
-       /*  try
-        {
-            var newBasketItemCreated = await this._basketItemsService.AddNewBasketItem_ServiceAsync(new BasketItems() { Quantity = requestRegisterBasketItem.Quantity, ProductId = requestRegisterBasketItem.ProductId });
-            var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(new Basket() { BuyerId = requestRegisterBasketItem.BuyerId });
+        /*  try
+         {
+             var newBasketItemCreated = await this._basketItemsService.AddNewBasketItem_ServiceAsync(new BasketItems() { Quantity = requestRegisterBasketItem.Quantity, ProductId = requestRegisterBasketItem.ProductId });
+             var newBasketCrated = await this._basketServices.AddNewBasket_ServiceAsync(new Basket() { BuyerId = requestRegisterBasketItem.BuyerId });
 
-            if (newBasketItemCreated is not null || newBasketCrated is not null)
-            {
-                this._logger.LogInformation($"New items successfully added");
-                return Ok(new { Success = true, NewBasketItemCreated = newBasketItemCreated });
-            }
-        }
-        catch (Exception exception)
-        {
-            Console.WriteLine("Error -> " + exception.Message);
-            this._logger.LogInformation("Error -> " + exception.Message);
-            return BadRequest(new { Error = exception.Message });
-        } */
+             if (newBasketItemCreated is not null || newBasketCrated is not null)
+             {
+                 this._logger.LogInformation($"New items successfully added");
+                 return Ok(new { Success = true, NewBasketItemCreated = newBasketItemCreated });
+             }
+         }
+         catch (Exception exception)
+         {
+             Console.WriteLine("Error -> " + exception.Message);
+             this._logger.LogInformation("Error -> " + exception.Message);
+             return BadRequest(new { Error = exception.Message });
+         } */
 
         return BadRequest(new { Success = false, Message = "Something went wrong!" });
     }
@@ -77,6 +77,27 @@ public class BasketItemController : ControllerBase
         }
 
         return BadRequest(new { Success = false, Message = "Baskets items list could not be returned!" });
+    }
+
+    [HttpDelete("delete/basketById/{id}")]
+    public async Task<ActionResult> DeleteBasketItemById([FromRoute] long id)
+    {
+        try
+        {
+            var basketItemDeleted = await this._basketItemsService.DeleteBasketItemById_ServiceAsync(id);
+
+            if (basketItemDeleted is not null)
+            {
+                this._logger.LogInformation($"Basket with {id} was successfully deleted");
+                return Ok(new { Success = true, BasketItemDeleted = basketItemDeleted });
+            }
+        }
+        catch (System.Exception exception)
+        {
+            this._logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Error = exception.Message });
+        }
+        return BadRequest(new { Success = false, Message = "Baskets item could not be deleted!" });
     }
 
 }

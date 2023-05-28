@@ -25,4 +25,9 @@ public class BasketItemsService
     {
         return await this._basketItemRepository.GetAllBasketItems();
     }
+
+    public async Task<BasketItems> DeleteBasketItemById_ServiceAsync(long id)
+    {
+        return await this._basketItemRepository.DeleteBasketItemsById(id);
+    }
 }

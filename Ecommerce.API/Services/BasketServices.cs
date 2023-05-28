@@ -33,21 +33,21 @@ public class BasketServices
         var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
         if (existUser is null) return null;
 
-        var exitBasket = await this._basketRepository.GetBasketByUserId(existUser.Id);
+        var existBasket = await this._basketRepository.GetBasketByUserId(existUser.Id);
 
-        if (exitBasket is not null)
+        if (existBasket is not null)
         {
-            await this._basketRepository.DeletBasketById(exitBasket.Id);
-            /* 
-                        foreach (var product in requestRegisterBasket.products)
-                        {
-                            foreach (var quntitySize in (JArray)product["quantitySize"])
-                            {
-                                await this._basketItemRepository.AddNewBasketItem(new BasketItems()
-                                { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = exitBasket.Id });
-                            }
-                        }
-                        return exitBasket; */
+            await this._basketRepository.DeletBasketById(existBasket.Id);
+
+           /*  foreach (var product in requestRegisterBasket.products)
+            {
+                foreach (var quntitySize in (JArray)product["quantitySize"])
+                {
+                    await this._basketItemRepository.AddNewBasketItem(new BasketItems()
+                    { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = existBasket.Id });
+                }
+            }
+            return existBasket; */
         }
 
         var newBasketCreated = await this._basketRepository.AddNewBasket(new Basket() { BuyerId = existUser.Id });
@@ -74,7 +74,6 @@ public class BasketServices
     {
         var userByEmail = await this._userRepository.GetUserByEmailAsync(email);
 
-        System.Console.WriteLine("-------------------- " + userByEmail.Id);
         if (userByEmail is null)
             return null;
         return await this._basketRepository.GetBasketByUserId(userByEmail.Id);
