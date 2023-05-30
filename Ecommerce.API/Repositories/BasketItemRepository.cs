@@ -43,7 +43,7 @@ public class BasketItemRepository : IBasketItemRepository
     public async Task<BasketItems> DeleteBasketItemsById(long id)
     {
 
-        var basketItemToRemove = await GetBasketItemsById(id);
+        var basketItemToRemove = await this._context.BasketItems.FirstOrDefaultAsync(item => item.ProductId == id);
 
         if (basketItemToRemove is not null)
         {
