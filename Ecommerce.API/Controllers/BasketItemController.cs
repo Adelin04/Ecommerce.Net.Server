@@ -79,7 +79,7 @@ public class BasketItemController : ControllerBase
         return BadRequest(new { Success = false, Message = "Baskets items list could not be returned!" });
     }
 
-    [HttpDelete("delete/basketById/{id}")]
+    [HttpDelete("delete/basketItemById/{id}")]
     public async Task<ActionResult> DeleteBasketItemById([FromRoute] long id)
     {
         try
