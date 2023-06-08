@@ -68,9 +68,9 @@ public class BasketItemRepository : IBasketItemRepository
         return basketItemToRemove;
     }
 
-    public async Task<BasketItems?> DecrementBasketItemQuantityById(long id)
+    public async Task<BasketItems?> DecrementBasketItemQuantityById(long id, string size)
     {
-        var item = await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.ProductId == id);
+        var item = await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.ProductId == id && basketItem.Size == size);
 
         if (item is not null && item.Quantity == 1) await this.DeleteBasketItemsById(item.Id);
 

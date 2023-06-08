@@ -12,7 +12,7 @@ public class BasketItemsService
 {
     private readonly IBasketItemRepository _basketItemRepository;
     private readonly IBasketRepository _basketRepository;
-    public BasketItemsService(IBasketItemRepository basketItemRepository,IBasketRepository basketRepository)
+    public BasketItemsService(IBasketItemRepository basketItemRepository, IBasketRepository basketRepository)
     {
         this._basketItemRepository = basketItemRepository;
         this._basketRepository = basketRepository;
@@ -28,8 +28,9 @@ public class BasketItemsService
         return await this._basketItemRepository.GetAllBasketItems();
     }
 
-    public async Task<BasketItems> DecrementBasketItemQuantityById(long id){
-        return await this._basketItemRepository.DecrementBasketItemQuantityById(id);
+    public async Task<BasketItems> DecrementBasketItemQuantityById(long id, string size)
+    {
+        return await this._basketItemRepository.DecrementBasketItemQuantityById(id, size);
     }
 
     public async Task<BasketItems> DeleteBasketItemByProductId_ServiceAsync(long id)

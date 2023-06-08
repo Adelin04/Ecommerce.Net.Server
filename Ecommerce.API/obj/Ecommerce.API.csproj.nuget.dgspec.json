@@ -1,34 +1,20 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {}
+    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {}
   },
   "projects": {
-    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {
+    "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+        "projectUniqueName": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
         "projectName": "Ecommerce.API",
-        "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+        "projectPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
         "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-        "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
-=======
-    "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {}
-  },
-  "projects": {
-    "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
-        "projectName": "Ecommerce.API",
-        "projectPath": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
-        "packagesPath": "C:\\Users\\Video.VIDEO-PC\\.nuget\\packages\\",
-        "outputPath": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
->>>>>>> d5c641454564554d054ca6d2409cc389e0a106ea
+        "outputPath": "F:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Video.VIDEO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -112,6 +98,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.13, 6.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.13, 6.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.13, 6.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.13, 6.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -120,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.1.23115.2\\RuntimeIdentifierGraph.json"
         }
       }
     }

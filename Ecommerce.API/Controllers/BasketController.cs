@@ -87,7 +87,7 @@ public class BasketController : ControllerBase
         try
         {
             var basketByUserEmail = await this._basketServices.GetBasketByUserEmail_ServiceAsync(userEmail);
-            System.Console.WriteLine("---------------------> " + basketByUserEmail.ToJson());
+
             if (basketByUserEmail is not null)
             {
                 this._logger.LogInformation("The basket given by the user id");
