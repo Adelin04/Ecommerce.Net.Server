@@ -84,7 +84,7 @@ public class BasketItemController : ControllerBase
     {
         try
         {
-            var basketItemDeleted = await this._basketItemsService.DeleteBasketItemById_ServiceAsync(id);
+            var basketItemDeleted = await this._basketItemsService.DeleteBasketItemByProductId_ServiceAsync(id);
 
             if (basketItemDeleted is not null)
             {
@@ -98,6 +98,29 @@ public class BasketItemController : ControllerBase
             return BadRequest(new { Error = exception.Message });
         }
         return BadRequest(new { Success = false, Message = "Baskets item could not be deleted!" });
+    }
+
+    [HttpPost("decrement/quntity/basketItemById/{id}")]
+    public async Task<ActionResult> DecrementItemQuantity([FromRoute] long id)
+    {
+
+        try
+        {
+            var itemDecremented = await this._basketItemsService.DecrementBasketItemQuantityById(id);
+
+            if (itemDecremented is not null)
+            {
+                this._logger.LogInformation($"Basket with {id} was successfully deleted");
+                return Ok(new { Success = true, ItemDecremented = itemDecremented });
+            }
+        }
+        catch (System.Exception exception)
+        {
+            this._logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Error = exception.Message });
+        }
+        return BadRequest(new { Success = false, Message = "Baskets item could not be deleted!" });
+
     }
 
 }

@@ -12,7 +12,9 @@ namespace Ecommerce.API.Interfaces
         public Task<List<BasketItems>> GetAllBasketItems();
 
         public Task<List<BasketItems>> GetBasketItemsByUserId(long id);
+        public Task<BasketItems> DecrementBasketItemQuantityById(long id);
         public Task<BasketItems> GetBasketItemsById(long id);
+        public Task<BasketItems> DeleteBasketItemsByProductId(long id);
         public Task<BasketItems> DeleteBasketItemsById(long id);
     }
 }

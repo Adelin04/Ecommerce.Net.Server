@@ -28,9 +28,13 @@ public class BasketItemsService
         return await this._basketItemRepository.GetAllBasketItems();
     }
 
-    public async Task<BasketItems> DeleteBasketItemById_ServiceAsync(long id)
+    public async Task<BasketItems> DecrementBasketItemQuantityById(long id){
+        return await this._basketItemRepository.DecrementBasketItemQuantityById(id);
+    }
+
+    public async Task<BasketItems> DeleteBasketItemByProductId_ServiceAsync(long id)
     {
 
-        return await this._basketItemRepository.DeleteBasketItemsById(id);
+        return await this._basketItemRepository.DeleteBasketItemsByProductId(id);
     }
 }

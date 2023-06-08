@@ -1,6 +1,7 @@
 # E-commerce.Net.React
 
- "E-commerce" as the name implies is an online store. 
+ "E-commerce" as the name implies is an server for an online store. 
+https://e-commerce-boutique.netlify.app
 
 Tech stack used:
 - .Net 6 for the backend 
