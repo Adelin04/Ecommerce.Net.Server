@@ -18,7 +18,7 @@ public class BasketItemRepository : IBasketItemRepository
     {
         this._context = context;
     }
-    public async Task<BasketItems> AddNewBasketItem(BasketItems newBasketItem)
+    public async Task<BasketItems?> AddNewBasketItem(BasketItems newBasketItem)
     {
         var newBasketItemCreated = await this._context.BasketItems.AddAsync(newBasketItem);
 
@@ -27,6 +27,7 @@ public class BasketItemRepository : IBasketItemRepository
             await this._context.SaveChangesAsync();
             return newBasketItem;
         }
+
         return null;
     }
 
@@ -39,8 +40,9 @@ public class BasketItemRepository : IBasketItemRepository
     public async Task<List<BasketItems>?> GetBasketItemsByUserId(long id) => await this._context.BasketItems.Include(item => item.Id == id).ToListAsync();
 
 
-    public async Task<BasketItems?> GetBasketItemsById(long id) => await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.Id == id);
-    public async Task<BasketItems> DeleteBasketItemsById(long id)
+    public async Task<BasketItems> GetBasketItemsById(long id) => await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.Id == id);
+
+    public async Task<BasketItems> DeleteBasketItemsByProductId(long id)
     {
 
         var basketItemToRemove = await this._context.BasketItems.FirstOrDefaultAsync(item => item.ProductId == id);
@@ -51,5 +53,32 @@ public class BasketItemRepository : IBasketItemRepository
             await this._context.SaveChangesAsync();
         }
         return basketItemToRemove;
+    }
+
+    public async Task<BasketItems?> DeleteBasketItemsById(long id)
+    {
+
+        var basketItemToRemove = await this._context.BasketItems.FirstOrDefaultAsync(item => item.Id == id);
+
+        if (basketItemToRemove is not null)
+        {
+            this._context.BasketItems.Remove(basketItemToRemove);
+            await this._context.SaveChangesAsync();
+        }
+        return basketItemToRemove;
+    }
+
+    public async Task<BasketItems?> DecrementBasketItemQuantityById(long id)
+    {
+        var item = await this._context.BasketItems.FirstOrDefaultAsync(basketItem => basketItem.ProductId == id);
+
+        if (item is not null && item.Quantity == 1) await this.DeleteBasketItemsById(item.Id);
+
+
+        if (item is not null) item.Quantity -= 1;
+
+        await this._context.SaveChangesAsync();
+
+        return item;
     }
 }
