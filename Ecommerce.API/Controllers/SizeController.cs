@@ -1,6 +1,7 @@
 ﻿using Ecommerce.API.Services;
 using Ecommerce.API.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ecommerce.API.Controllers;
 
@@ -38,6 +39,7 @@ public class SizeController : ControllerBase
         return NotFound(new { Success = false });
     }
 
+    [Authorize(Roles = "ADMIN")]
     [HttpPost("create/newSize")]
     public async Task<ActionResult> CreateNewSize(SizeDataRegister sizeDataRegister)
     {

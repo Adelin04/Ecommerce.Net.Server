@@ -6119,11 +6119,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+      "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
       "projectName": "Ecommerce.UnitTests",
-      "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+      "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
       "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-      "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Server.Ubuntu\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\obj\\",
+      "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"

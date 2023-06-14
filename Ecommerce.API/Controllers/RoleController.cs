@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ecommerce.API.Controllers;
 
 [ApiController]
+[Authorize(Roles = "ADMIN")]
 [Route("api/[controller]/v1")]
 public class RoleController : ControllerBase
 {
@@ -19,7 +20,6 @@ public class RoleController : ControllerBase
         this._roleService = roleService;
     }
 
-    [Authorize(Roles = "ADMIN")]
     [HttpPost("create/newRole/")]
     public async Task<ActionResult> CreateNewRole([FromBody] RoleDataCreateNewRole dataCreateNewRole)
     {
@@ -42,17 +42,16 @@ public class RoleController : ControllerBase
 
         this.Logger.LogInformation($"The role {dataCreateNewRole.nameRole} could not be created!");
         return BadRequest(new
-            { Success = false, Message = $"The role {dataCreateNewRole.nameRole} could not be created!" });
+        { Success = false, Message = $"The role {dataCreateNewRole.nameRole} could not be created!" });
     }
 
-    [Authorize(Roles = "ADMIN")]
     [HttpGet("get/roleById/{id}")]
     public async Task<ActionResult> GetRoleById(long id)
     {
         try
         {
             var roleById = await this._roleService.GetRoleById_ServiceAsync(id);
-            
+
             if (roleById is not null)
             {
                 this.Logger.LogInformation($"Role by id -> {roleById.Id}");
@@ -68,7 +67,6 @@ public class RoleController : ControllerBase
         return BadRequest(new { Success = false, Message = $"Role by id not found!" });
     }
 
-    [Authorize(Roles = "ADMIN")]
     [HttpGet("get/allRoles")]
     public async Task<ActionResult> GetAllRoles()
     {
@@ -96,11 +94,9 @@ public class RoleController : ControllerBase
 
         this.Logger.LogInformation($"Role list could not be found!");
         return BadRequest(new
-            { Success = false, Message = $"Role list  could not be created!" });
+        { Success = false, Message = $"Role list  could not be created!" });
     }
 
-
-    [Authorize(Roles = "ADMIN")]
     [HttpPut("update/roleById/{id}")]
     public async Task<ActionResult> UpdateRoleById([FromRoute] long id, [FromBody] RoleDataUpdate roleDataUpdate)
     {
@@ -125,7 +121,6 @@ public class RoleController : ControllerBase
         return BadRequest(new { Success = false, Message = $"The role {roleDataUpdate.name} could not be updated!" });
     }
 
-    [Authorize(Roles = "ADMIN")]
     [HttpDelete("delete/roleById/{id}")]
     public async Task<ActionResult> DeleteRoleById([FromRoute] long id)
     {
@@ -147,6 +142,6 @@ public class RoleController : ControllerBase
 
         this.Logger.LogInformation($"The role {deletedRole.Name} could not be removed from DB!");
         return BadRequest(new
-            { Success = false, Message = $"The role {deletedRole.Name} could not be removed from DB!" });
+        { Success = false, Message = $"The role {deletedRole.Name} could not be removed from DB!" });
     }
 }

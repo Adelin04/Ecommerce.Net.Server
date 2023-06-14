@@ -30,20 +30,19 @@ public class ProductService
         this._imagesService = imagesService;
     }
 
-    public async Task<Product> CreateNewProduct_ServiceAsync(ProductDataRegister productDataRegister)
+    public async Task<Product?> CreateNewProduct_ServiceAsync(ProductDataRegister productDataRegister)
     {
+        string AWS_BASE_URL_PHOTO = " https://e-commerce-photos.s3.amazonaws.com/";
         List<SizeStock> listOfSize = new List<SizeStock>();
         Product newProduct = null;
         SizeStock sizeStock = null;
-        string awsBaseUrlPhoto = " https://e-commerce-photos.s3.amazonaws.com/";
 
-        var findCategoryProduct =
+        var existCategoryProduct =
             await this._categoryProductRepository.GetCategoryProductByNameAsync(productDataRegister.CategoryName);
 
         var findSizesProduct = await this._sizeRepository.GetAllSizeAsync();
 
-        if (findCategoryProduct is null)
-            return null;
+        if (existCategoryProduct is null) return null;
 
 
         //register new product
@@ -56,7 +55,7 @@ public class ProductService
         newProduct.Stock = 10;
 
         //FOREIGNKEY category product
-        newProduct.CategoryProductId = findCategoryProduct.Id;
+        newProduct.CategoryProductId = existCategoryProduct.Id;
 
 
         var newProductCreated = await this._productRepository.CreateNewProductAsync(newProduct);
@@ -100,7 +99,7 @@ public class ProductService
                 if (AWSresult is not null)
                 {
                     ProductImagesDataRegister newImages =
-                        new ProductImagesDataRegister($"{awsBaseUrlPhoto}{file.FileName}", newProductCreated.Id);
+                        new ProductImagesDataRegister($"{AWS_BASE_URL_PHOTO}{file.FileName}", newProductCreated.Id);
                     await this._productImagesService.CreateNewProductImages_ServiceAsync(newImages);
                 }
             }
