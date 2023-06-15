@@ -22,6 +22,7 @@ public class Product
     public double Price { get; set; }
     public long Stock { get; set; }
     public string Currency { get; set; }
+    public string ProductCode { get; set; }
 
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

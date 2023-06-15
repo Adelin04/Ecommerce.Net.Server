@@ -122,6 +122,10 @@ namespace Ecommerce.API.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<long>("Stock")
                         .HasColumnType("bigint");
 

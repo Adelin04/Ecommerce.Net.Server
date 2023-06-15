@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 // DB_CONTEXT
 var DEV_DB = builder.Configuration.GetConnectionString("DevConnection");
 var PRODUCTION_DB = builder.Configuration.GetConnectionString("DefaulConnection");
-builder.Services.AddDbContext<EcommerceContext>(options => options.UseNpgsql(PRODUCTION_DB));
+builder.Services.AddDbContext<EcommerceContext>(options => options.UseNpgsql(DEV_DB));
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
