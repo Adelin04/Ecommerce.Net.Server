@@ -1,4 +1,5 @@
 ﻿using Ecommerce.API.Contracts;
+using Ecommerce.API.Models;
 using Ecommerce.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,21 +26,22 @@ public class ProductController : ControllerBase
     [HttpPost("create/newProduct")]
     public async Task<ActionResult> CreateNewProduct([FromForm] ProductDataRegister productDataRegister)
     {
+
         try
         {
             var newProductCreated = await this._productService.CreateNewProduct_ServiceAsync(productDataRegister);
 
             if (newProductCreated is not null)
-                return Ok(new { Success = true,  NewProductCreated = newProductCreated });
+                return Ok(new { Success = true, NewProductCreated = newProductCreated });
         }
         catch (Exception exception)
         {
             this.Logger.LogInformation("Error -> " + exception.Message);
-            return BadRequest(new {Success = false, Error = exception.Message });
+            return BadRequest(new { Success = false, Error = exception.Message });
         }
 
         return BadRequest(new
-            { Success = false, Message = $"The product {productDataRegister.Name} could not be created!" });
+        { Success = false, Message = $"The product {productDataRegister.Name} could not be created!" });
     }
 
     [HttpGet("get/allProducts")]
@@ -54,7 +56,7 @@ public class ProductController : ControllerBase
                 return Ok(new { Success = true, Products = listOfProducts, Count = listOfProducts.Count });
             }
 
-            if (listOfProducts.Count < 1)
+            if (listOfProducts?.Count < 1)
             {
                 this.Logger.LogInformation($"Returned products list");
                 return Ok(new { Message = $"Products list is empty -> {listOfProducts.Count}" });
@@ -112,7 +114,7 @@ public class ProductController : ControllerBase
 
         this.Logger.LogInformation($"The product {productDataUpdate.Name} could not be updated!");
         return BadRequest(new
-            { Success = false, Message = $"The product {productDataUpdate.Name} could not be updated!" });
+        { Success = false, Message = $"The product {productDataUpdate.Name} could not be updated!" });
     }
 
     [Authorize(Roles = "ADMIN")]
@@ -137,6 +139,6 @@ public class ProductController : ControllerBase
 
         this.Logger.LogInformation($"The product {removedProduct.Name} could not be removed from DB!");
         return BadRequest(new
-            { Success = false, Message = $"The product {removedProduct.Name} could not be removed from DB!" });
+        { Success = false, Message = $"The product {removedProduct.Name} could not be removed from DB!" });
     }
 }

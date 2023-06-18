@@ -9,7 +9,9 @@ public record ProductDataRegister
     string Color,
     string Description,
     double Price,
-    List<SizeStockDataRegister> Sizes,
+    string ProductCode,
+    string Size,
+    long stock,
     string CategoryName,
     List<IFormFile> Files
 );

@@ -15,7 +15,7 @@ public class ProductRepository : IProductRepository
         this._context = context;
     }
 
-    public async Task<Product> CreateNewProductAsync(Product newProduct)
+    public async Task<Product?> CreateNewProductAsync(Product newProduct)
     {
         var newProductCreated = await this._context.Products.AddAsync(newProduct);
 
@@ -39,7 +39,7 @@ public class ProductRepository : IProductRepository
     public async Task<List<Product>?> GetAllProductsAsync()
     {
         return await this._context.Products.Include(categoryProduct => categoryProduct.CategoryProduct)
-             .Include(product => product.ProductImages).Include(product => product.SizeStocks).ToListAsync();
+             .Include(product => product.ProductImages).Include(product => product.SizeStocks).ThenInclude(size => size.Size).ToListAsync();
     }
 
     public async Task<Product> DeleteProductByIdAsync(long id)

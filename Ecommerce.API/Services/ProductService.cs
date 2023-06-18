@@ -32,10 +32,9 @@ public class ProductService
 
     public async Task<Product?> CreateNewProduct_ServiceAsync(ProductDataRegister productDataRegister)
     {
-        string AWS_BASE_URL_PHOTO = " https://e-commerce-photos.s3.amazonaws.com/";
-        List<SizeStock> listOfSize = new List<SizeStock>();
-        Product newProduct = null;
-        SizeStock sizeStock = null;
+        const string AWS_BASE_URL_PHOTO = " https://e-commerce-photos.s3.amazonaws.com/";
+        Product? newProduct = null;
+        List<SizeStock> TMP_listOfSize = new();
 
         var existCategoryProduct =
             await this._categoryProductRepository.GetCategoryProductByNameAsync(productDataRegister.CategoryName);
@@ -44,36 +43,32 @@ public class ProductService
 
         if (existCategoryProduct is null) return null;
 
-
-        //register new product
+        //  Create the new product
         newProduct = new Product();
         newProduct.Name = productDataRegister.Name;
         newProduct.Brand = productDataRegister.Brand;
         newProduct.Color = productDataRegister.Color;
         newProduct.Description = productDataRegister.Description;
         newProduct.Price = productDataRegister.Price;
-        newProduct.Stock = 10;
+        newProduct.ProductCode = productDataRegister.ProductCode;
 
-        //FOREIGNKEY category product
+        //  Add FOREIGNKEY category product
         newProduct.CategoryProductId = existCategoryProduct.Id;
-
 
         var newProductCreated = await this._productRepository.CreateNewProductAsync(newProduct);
 
-        // register new size and stock product
-        if (newProductCreated is not null)
-            foreach (var size in productDataRegister.Sizes)
-            {
-                var verifySizeExist = findSizesProduct.Find(item => item.Name == size.Size);
+        // register size and stock for the new product
+        if (newProductCreated is null) return null;
+        var verifySizeExist = findSizesProduct.Find(item => item.Name == productDataRegister.Size);
 
-                listOfSize.Add(new SizeStock
-                { Stock = size.Stock, FK_ProductId = newProductCreated.Id, FK_SizeId = verifySizeExist.Id });
-            }
+        if (verifySizeExist is null) return null;
+        TMP_listOfSize.Add(new SizeStock { Stock = productDataRegister.stock, FK_ProductId = newProductCreated.Id, FK_SizeId = verifySizeExist.Id });
 
-        var newListOfSizeStockRegistered = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(listOfSize);
+        var newListOfSizeStockRegistered = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(TMP_listOfSize);
 
         // submit new product photos to aws S3
         if (newListOfSizeStockRegistered is not null)
+        {
             foreach (var file in productDataRegister.Files)
             {
                 await using var memoryStream = new MemoryStream();
@@ -98,44 +93,22 @@ public class ProductService
 
                 if (AWSresult is not null)
                 {
-                    ProductImagesDataRegister newImages =
-                        new ProductImagesDataRegister($"{AWS_BASE_URL_PHOTO}{file.FileName}", newProductCreated.Id);
+                    ProductImagesDataRegister newImages = new($"{AWS_BASE_URL_PHOTO}{file.FileName}", newProductCreated.Id);
                     await this._productImagesService.CreateNewProductImages_ServiceAsync(newImages);
                 }
             }
+        }
 
         return newProduct;
     }
 
-    public async Task<Product> GetProductById_ServiceAsync(long id)
-    {
-        var productById = await this._productRepository.GetProductByIdAsync(id);
+    public async Task<Product?> GetProductById_ServiceAsync(long id) => await this._productRepository.GetProductByIdAsync(id);
 
-        if (productById is not null)
-            return productById;
-        return null;
-    }
 
-    public async Task<List<Product>> GetAllProducts_ServiceAsync()
-    {
-        var listAllProducts = await this._productRepository.GetAllProductsAsync();
+    public async Task<List<Product>?> GetAllProducts_ServiceAsync() => await this._productRepository.GetAllProductsAsync();
 
-        if (listAllProducts is not null)
-            return listAllProducts;
-        return null;
-    }
+    public async Task<Product> UpdateProductById_ServiceAsync(long id, ProductDataUpdate productDataUpdate) => await this._productRepository.UpdateProductByIdAsync(id, productDataUpdate);
 
-    public async Task<Product> UpdateProductById_ServiceAsync(long id, ProductDataUpdate productDataUpdate)
-    {
-        return await this._productRepository.UpdateProductByIdAsync(id, productDataUpdate);
-    }
+    public async Task<Product> DeleteProductById_ServiceAsync(long id) => await this._productRepository.DeleteProductByIdAsync(id);
 
-    public async Task<Product> DeleteProductById_ServiceAsync(long id)
-    {
-        var removedProduct = await this._productRepository.DeleteProductByIdAsync(id);
-
-        if (removedProduct is not null)
-            return removedProduct;
-        return null;
-    }
 }

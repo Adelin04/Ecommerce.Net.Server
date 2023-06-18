@@ -33,14 +33,14 @@ public class SizeRepository : ISizeRepository
         return allSizes;
     }
 
-    public Task<Size> GetAllSizeByIdAsync(long id)
+    public Task<Size> GetSizeByIdAsync(long id)
     {
         var sizeById = this._context.Sizes.FirstOrDefaultAsync(size => size.Id == id);
 
         return sizeById;
     }
 
-    public Task<Size> GetAllSizeByNameAsync(string name)
+    public Task<Size> GetSizeByNameAsync(string name)
     {
         var sizeByName = this._context.Sizes.FirstOrDefaultAsync(size => size.Name == name);
 
