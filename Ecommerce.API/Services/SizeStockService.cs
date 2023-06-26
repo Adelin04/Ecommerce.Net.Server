@@ -1,3 +1,4 @@
+using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Ecommerce.API.Repositories;
 
@@ -5,11 +6,11 @@ namespace Ecommerce.API.Services;
 
 public class SizeStockService
 {
-    private readonly SizeStockRepository _sizeStockRepository;
-    private readonly ProductRepository _productRepository;
-    private readonly SizeRepository _sizeRepository;
+    private readonly ISizeStockRepository _sizeStockRepository;
+    private readonly IProductRepository _productRepository;
+    private readonly ISizeRepository _sizeRepository;
 
-    public SizeStockService(SizeStockRepository sizeStockRepository, ProductRepository productRepository, SizeRepository sizeRepository)
+    public SizeStockService(ISizeStockRepository sizeStockRepository, IProductRepository productRepository, ISizeRepository sizeRepository)
     {
         this._sizeStockRepository = sizeStockRepository;
         this._productRepository = productRepository;
@@ -20,7 +21,6 @@ public class SizeStockService
     {
         var existProduct = await this._productRepository.GetProductByIdAsync(id);
         var existSize = await this._sizeRepository.GetSizeByNameAsync(size);
-
         if (existProduct is null) return null;
         if (existSize is null) return null;
 

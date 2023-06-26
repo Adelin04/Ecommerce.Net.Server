@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 public class SizeStockRepository : ISizeStockRepository
 {
 
-    private EcommerceContext _context;
+    private readonly EcommerceContext _context;
 
     public SizeStockRepository(EcommerceContext context)
     {
@@ -16,10 +16,9 @@ public class SizeStockRepository : ISizeStockRepository
     public async Task<SizeStock> RegisterNewSizeStockAsync(SizeStock newSizeStock)
     {
         var sizeStockRegistered = await this._context.SizeStocks.AddAsync(newSizeStock);
-
         if (sizeStockRegistered.State == EntityState.Added)
         {
-            await this._context.SaveChangesAsync(true);
+            await this._context.SaveChangesAsync();
             return newSizeStock;
         }
         return null;
@@ -29,25 +28,15 @@ public class SizeStockRepository : ISizeStockRepository
 
     public async Task<List<SizeStock>> RegisterListOfNewSizeStockAsync(List<SizeStock> listSizeStock)
     {
-        List<SizeStock> listSizeStockRegistered = new List<SizeStock>();
-
         foreach (var size in listSizeStock)
         {
             var sizeStockRegistered = await this._context.SizeStocks.AddAsync(size);
             if (sizeStockRegistered.State == EntityState.Added)
             {
-                listSizeStockRegistered.Add(size);
+                await this._context.SaveChangesAsync(true);
             }
-            else
-            {
-                listSizeStockRegistered = null;
-            }
-
         }
-
-        await this._context.SaveChangesAsync(true);
-
-        return listSizeStockRegistered;
+        return listSizeStock;
     }
 
     public async Task<List<SizeStock>> GetAllSizeStockRegisteredAsync()

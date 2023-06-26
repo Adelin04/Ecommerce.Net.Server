@@ -88,6 +88,7 @@ builder.Services.AddScoped<SizeService>();
 builder.Services.AddScoped<AwsS3StorageImagesService>();
 builder.Services.AddScoped<BasketServices>();
 builder.Services.AddScoped<BasketItemsService>();
+builder.Services.AddScoped<SizeStockService>();
 
 
 var app = builder.Build();
