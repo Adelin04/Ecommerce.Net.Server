@@ -26,18 +26,9 @@ public class SizeStockController : ControllerBase
     {
         try
         {
-            foreach (var item in requestRegisterSizeStock.listOfNewSizeStock)
-            {
 
-                var newSizeStockAdded = await this._sizeStockService.AddNewSizeAndStockExistProduct_ServiceAsync(requestRegisterSizeStock.idProduct, (long)item["stock"], (string)item["size"]);
+            var newSizeStockAdded = await this._sizeStockService.AddListNewSizeAndStockExistProduct_ServiceAsync(requestRegisterSizeStock);
 
-                System.Console.WriteLine("-------------------------------------------------------------------newSizeStockAdded " + newSizeStockAdded);
-
-                // if (newSizeStockAdded is not null)
-                // {
-                // }
-                this.Logger.LogInformation($"The size {item["size"]} has been successfully added to product id {requestRegisterSizeStock.idProduct}");
-            }
             this.Logger.LogInformation($"The size(s) has been successfully added to product id {requestRegisterSizeStock.idProduct}");
             return Ok(new { Success = true, NewSizeStockAdded = requestRegisterSizeStock.listOfNewSizeStock });
         }

@@ -41,11 +41,11 @@ public class SizeController : ControllerBase
 
     [Authorize(Roles = "ADMIN")]
     [HttpPost("create/newSize")]
-    public async Task<ActionResult> CreateNewSize(SizeDataRegister sizeDataRegister)
+    public async Task<ActionResult> CreateNewSize(SizeDataRegister size)
     {
         try
         {
-            var newSizeCreated = await this._sizeService.CreateNewSize(sizeDataRegister);
+            var newSizeCreated = await this._sizeService.CreateNewSize(size);
 
             if (newSizeCreated is not null)
             {
@@ -59,7 +59,7 @@ public class SizeController : ControllerBase
             this.Logger.LogInformation($"Error -> {exception.Message}");
         }
 
-        this.Logger.LogInformation($"The size '{sizeDataRegister.Name}' was not could be created.");
-        return BadRequest(new { Success = false, Message = $"The size '{sizeDataRegister.Name}' was not could be created." });
+        this.Logger.LogInformation($"The size '{size.SizeName}' was not could be created.");
+        return BadRequest(new { Success = false, Message = $"The size '{size.SizeName}' was not could be created." });
     }
 }

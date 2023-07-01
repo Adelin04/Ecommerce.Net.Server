@@ -1,3 +1,4 @@
+using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Ecommerce.API.Repositories;
@@ -30,5 +31,26 @@ public class SizeStockService
         if (newSizeAndSrockAdded is null) return null;
 
         return newSizeAndStock;
+    }
+    public async Task<List<Dictionary<string, object>>> AddListNewSizeAndStockExistProduct_ServiceAsync(RequestRegisterSizeStock requestRegisterSizeStock)
+    {
+        List<SizeStock> TMP_listOfSizeAndStock = new();
+
+        foreach (var item in requestRegisterSizeStock.listOfNewSizeStock)
+        {
+            var existProduct = await this._productRepository.GetProductByIdAsync(requestRegisterSizeStock.idProduct);
+            var existSize = await this._sizeRepository.GetSizeByNameAsync((string)item["size"]);
+
+            if (existProduct is null) return null;
+            if (existSize is null) return null;
+
+            var newSizeAndStock = new SizeStock() { Stock = (long)item["stock"], FK_ProductId = existProduct.Id, FK_SizeId = existSize.Id };
+            TMP_listOfSizeAndStock.Add(newSizeAndStock);
+        }
+        var newSizeAndSrockAdded = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(TMP_listOfSizeAndStock);
+
+        if (newSizeAndSrockAdded is null) return null;
+
+        return requestRegisterSizeStock.listOfNewSizeStock;
     }
 }

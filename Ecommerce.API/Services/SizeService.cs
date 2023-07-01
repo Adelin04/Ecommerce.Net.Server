@@ -23,11 +23,11 @@ public class SizeService
     {
         Size newSize = null;
 
-        if (sizeDataRegister is null)
-            return null;
+
+        if (sizeDataRegister is null) return null;
 
         newSize = new Size();
-        newSize.Name = sizeDataRegister.Name;
+        newSize.Name = sizeDataRegister.SizeName;
 
         var createdNewSize = await this._sizeRepository.CreateNewSizeAsync(newSize);
 
