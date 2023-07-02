@@ -2,6 +2,7 @@ using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Ecommerce.API.Repositories;
+using NuGet.Protocol;
 
 namespace Ecommerce.API.Services;
 
@@ -39,17 +40,29 @@ public class SizeStockService
         foreach (var item in requestRegisterSizeStock.listOfNewSizeStock)
         {
             var existProduct = await this._productRepository.GetProductByIdAsync(requestRegisterSizeStock.idProduct);
-            var existSize = await this._sizeRepository.GetSizeByNameAsync((string)item["size"]);
-
             if (existProduct is null) return null;
+
+            var existSize = await this._sizeRepository.GetSizeByNameAsync((string)item["size"]);
             if (existSize is null) return null;
 
-            var newSizeAndStock = new SizeStock() { Stock = (long)item["stock"], FK_ProductId = existProduct.Id, FK_SizeId = existSize.Id };
-            TMP_listOfSizeAndStock.Add(newSizeAndStock);
+            var existSizeStock = await this._sizeStockRepository.GetSizeStockByIdProductAsync(existProduct.Id, existSize.Id);
+            if (existSizeStock is not null)
+            {
+                await this._sizeStockRepository.UpdateStockExistingSizeByIdProductAsync(existProduct.Id, (long)item["stock"], existSize.Id);
+            }
+            else
+            {
+                var newSizeAndStock = new SizeStock() { Stock = (long)item["stock"], FK_ProductId = existProduct.Id, FK_SizeId = existSize.Id };
+                TMP_listOfSizeAndStock.Add(newSizeAndStock);
+            }
         }
-        var newSizeAndSrockAdded = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(TMP_listOfSizeAndStock);
 
-        if (newSizeAndSrockAdded is null) return null;
+        if (TMP_listOfSizeAndStock.Count > 0)
+        {
+            var newSizeAndSrockAdded = await this._sizeStockRepository.RegisterListOfNewSizeStockAsync(TMP_listOfSizeAndStock);
+            if (newSizeAndSrockAdded is null) return null;
+
+        }
 
         return requestRegisterSizeStock.listOfNewSizeStock;
     }

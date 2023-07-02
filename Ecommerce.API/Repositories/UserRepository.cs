@@ -71,7 +71,7 @@ public class UserRepository : IUserRepository
         return findUserById;
     }
 
-    public async Task<User> DeleteUserByIdAsync([FromRoute] long id)
+    public async Task<User> DeleteUserByIdAsync(long id)
     {
         var userByIdToDelete = await this._context.Users.FirstOrDefaultAsync(user => user.Id == id);
         var removedUserById = this._context.Users.Remove(userByIdToDelete);

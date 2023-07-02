@@ -26,7 +26,6 @@ public class SizeStockController : ControllerBase
     {
         try
         {
-
             var newSizeStockAdded = await this._sizeStockService.AddListNewSizeAndStockExistProduct_ServiceAsync(requestRegisterSizeStock);
 
             this.Logger.LogInformation($"The size(s) has been successfully added to product id {requestRegisterSizeStock.idProduct}");

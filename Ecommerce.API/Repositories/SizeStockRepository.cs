@@ -39,10 +39,26 @@ public class SizeStockRepository : ISizeStockRepository
         return listSizeStock;
     }
 
+    public async Task<SizeStock?> GetSizeStockByIdProductAsync(long idProduct, long sizeId) =>
+         await this._context.SizeStocks.FirstOrDefaultAsync(sizeSock => sizeSock.FK_ProductId == idProduct && sizeSock.FK_SizeId == sizeId);
+
+
     public async Task<List<SizeStock>> GetAllSizeStockRegisteredAsync()
     {
         var listOfSizeStock = await this._context.SizeStocks.ToListAsync();
 
         return listOfSizeStock;
+    }
+
+    public async Task<SizeStock?> UpdateStockExistingSizeByIdProductAsync(long id, long newStock, long sizeId)
+    {
+        var existSizeStock = await this._context.SizeStocks.FirstOrDefaultAsync(sizeStock => sizeStock.FK_ProductId == id && sizeStock.FK_SizeId == sizeId);
+
+        if (existSizeStock is not null && existSizeStock.Size.Id == sizeId)
+            existSizeStock.Stock += newStock;
+
+        await this._context.SaveChangesAsync();
+
+        return existSizeStock;
     }
 }
