@@ -9,17 +9,18 @@ namespace Ecommerce.API.Controllers;
 
 public class InvoiceController : ControllerBase
 {
-    private InvoiceController _invoiceController;
+
+    private InvoiceService _invoiceService;
     private ILogger<InvoiceController> Logger;
 
-    public InvoiceController(InvoiceController invoiceController, ILogger<InvoiceController> logger)
+    public InvoiceController(InvoiceService invoiceService, ILogger<InvoiceController> logger)
     {
-        this._invoiceController = invoiceController;
+        this._invoiceService = invoiceService;
         this.Logger = logger;
     }
 
     [HttpPost("datainvoice")]
-    public async Task<ActionResult> Invoice(RequestRegisterInvoice requestRegisterInvoice)
+    public async Task<ActionResult> CreateNewInvoice(RequestRegisterInvoice requestRegisterInvoice)
     {
         System.Console.WriteLine("-------------------------------------------" + requestRegisterInvoice);
         return Ok(new { Success = true });

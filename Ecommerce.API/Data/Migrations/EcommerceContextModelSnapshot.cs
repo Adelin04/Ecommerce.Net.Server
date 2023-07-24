@@ -42,13 +42,18 @@ namespace Ecommerce.API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("id");
 
-                    b.ToTable("AddressCustomer");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AddressCustomers");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
@@ -327,6 +332,17 @@ namespace Ecommerce.API.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.AddressCustomer", b =>
+                {
+                    b.HasOne("Ecommerce.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>

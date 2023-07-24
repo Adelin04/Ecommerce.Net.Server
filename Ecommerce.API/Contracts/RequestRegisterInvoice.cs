@@ -3,6 +3,6 @@ using Ecommerce.API.Models;
 namespace Ecommerce.API.Contracts;
 
 public record RequestRegisterInvoice(
-   Dictionary<string, object> DataAddress
+   object DataAddress
 //    Basket Basket
 );
