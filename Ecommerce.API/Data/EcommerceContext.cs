@@ -16,6 +16,7 @@ public class EcommerceContext : DbContext
     public virtual DbSet<BasketItems> BasketItems { get; set; }
 
     public virtual DbSet<SizeStock> SizeStocks { get; set; }
+    public virtual DbSet<Invoice> Invoices { get; set; }
 
     public EcommerceContext(DbContextOptions options) : base(options)
     {

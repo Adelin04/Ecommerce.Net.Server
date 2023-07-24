@@ -22,6 +22,35 @@ namespace Ecommerce.API.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Ecommerce.API.Models.AddressCustomer", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("id");
+
+                    b.ToTable("AddressCustomer");
+                });
+
             modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
                 {
                     b.Property<long>("Id")
@@ -83,6 +112,29 @@ namespace Ecommerce.API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoryProducts");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
+
+                    b.Property<long>("AddressCustomerid")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("AddressCustomerid");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
@@ -294,6 +346,25 @@ namespace Ecommerce.API.Data.Migrations
                     b.Navigation("Basket");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
+                {
+                    b.HasOne("Ecommerce.API.Models.AddressCustomer", "AddressCustomer")
+                        .WithMany()
+                        .HasForeignKey("AddressCustomerid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AddressCustomer");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
