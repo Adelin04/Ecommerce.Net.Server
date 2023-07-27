@@ -22,7 +22,7 @@ public class InvoiceController : ControllerBase
     [HttpPost("datainvoice")]
     public async Task<ActionResult> CreateNewInvoice(RequestRegisterInvoice requestRegisterInvoice)
     {
-        System.Console.WriteLine("-------------------------------------------" + requestRegisterInvoice);
+        await this._invoiceService.CreateNewInvoice(requestRegisterInvoice);
         return Ok(new { Success = true });
     }
 }

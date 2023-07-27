@@ -78,6 +78,7 @@ builder.Services.AddTransient<IProductImagesRepository, ProductImagesRepository>
 builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IBasketItemRepository, BasketItemRepository>();
 builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddTransient<IAddressCustomerRepository, AddressCustomerRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();

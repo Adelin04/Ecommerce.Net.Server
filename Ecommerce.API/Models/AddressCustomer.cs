@@ -13,6 +13,7 @@ namespace Ecommerce.API.Models
         public string ZipCode { get; set; }
         public string Notes { get; set; }
 
-        public User User { get; set; }
+        public long UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

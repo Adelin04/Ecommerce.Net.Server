@@ -21,7 +21,7 @@ public class CategoryProductRepository : ICategoryProductRepository
 
         if (newCategoryProductCreated.State == EntityState.Added)
         {
-            await this._context.SaveChangesAsync(true);
+            await this._context.SaveChangesAsync();
             return newCategoryProduct;
         }
 

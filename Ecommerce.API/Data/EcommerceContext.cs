@@ -41,6 +41,7 @@ public class EcommerceContext : DbContext
         modelBuilder.Entity<SizeStock>().HasKey(sizeStock => sizeStock.Id);
         modelBuilder.Entity<Basket>().HasKey(basket => basket.Id);
         modelBuilder.Entity<BasketItems>().HasKey(basketItem => basketItem.Id);
+        modelBuilder.Entity<Invoice>().HasKey(invoice=>invoice.Id);
 
         // Relationships table User,Role,UserRole
         modelBuilder.Entity<UserRole>()
@@ -82,5 +83,12 @@ public class EcommerceContext : DbContext
         .HasForeignKey(basketItems => basketItems.BasketId)
         .OnDelete(DeleteBehavior.Cascade)
         );
+
+        //Relationships table Invoice,AddressCustomer
+        modelBuilder.Entity<Invoice>(entity =>
+        {
+            entity.HasOne<User>(user => user.User);
+            // entity.HasOne<AddressCustomer>(address => address.AddressCustomer);
+        });
     }
 }

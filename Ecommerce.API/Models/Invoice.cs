@@ -7,8 +7,11 @@ namespace Ecommerce.API.Models
 {
     public class Invoice
     {
-        public long id { get; set; }
-        public AddressCustomer AddressCustomer { get; set; }
-        public User User { get; set; }
+        public long Id { get; set; }
+
+        public virtual User User { get; set; }
+
+        public long AddressCustomerId { get; set; }
+        // public virtual AddressCustomer AddressCustomer { get; set; }
     }
 }

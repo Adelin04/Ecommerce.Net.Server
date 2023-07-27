@@ -121,21 +121,19 @@ namespace Ecommerce.API.Data.Migrations
 
             modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
                 {
-                    b.Property<long>("id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AddressCustomerid")
+                    b.Property<long>("AddressCustomerId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("AddressCustomerid");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -366,19 +364,11 @@ namespace Ecommerce.API.Data.Migrations
 
             modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
                 {
-                    b.HasOne("Ecommerce.API.Models.AddressCustomer", "AddressCustomer")
-                        .WithMany()
-                        .HasForeignKey("AddressCustomerid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Ecommerce.API.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AddressCustomer");
 
                     b.Navigation("User");
                 });
