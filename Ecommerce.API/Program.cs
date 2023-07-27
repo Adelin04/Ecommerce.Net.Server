@@ -77,7 +77,7 @@ builder.Services.AddTransient<ISizeStockRepository, SizeStockRepository>();
 builder.Services.AddTransient<IProductImagesRepository, ProductImagesRepository>();
 builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IBasketItemRepository, BasketItemRepository>();
-builder.Services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IAddressCustomerRepository, AddressCustomerRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
@@ -91,7 +91,7 @@ builder.Services.AddScoped<AwsS3StorageImagesService>();
 builder.Services.AddScoped<BasketServices>();
 builder.Services.AddScoped<BasketItemsService>();
 builder.Services.AddScoped<SizeStockService>();
-builder.Services.AddScoped<InvoiceService>();
+builder.Services.AddScoped<OrderService>();
 
 
 var app = builder.Build();

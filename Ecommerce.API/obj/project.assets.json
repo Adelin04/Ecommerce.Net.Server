@@ -9656,19 +9656,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MAVERICK\\.nuget\\packages\\": {}
+    "C:\\Users\\Video.VIDEO-PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "projectUniqueName": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
       "projectName": "Ecommerce.API",
-      "projectPath": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
-      "packagesPath": "C:\\Users\\MAVERICK\\.nuget\\packages\\",
-      "outputPath": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
+      "projectPath": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "packagesPath": "C:\\Users\\Video.VIDEO-PC\\.nuget\\packages\\",
+      "outputPath": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MAVERICK\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Video.VIDEO-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -9760,7 +9760,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
       }
     }
   }

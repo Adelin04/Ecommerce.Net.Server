@@ -119,7 +119,7 @@ namespace Ecommerce.API.Data.Migrations
                     b.ToTable("CategoryProducts");
                 });
 
-            modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
+            modelBuilder.Entity("Ecommerce.API.Models.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,7 +127,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AddressCustomerId")
+                    b.Property<long?>("AddressCustomerId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("UserId")
@@ -137,7 +137,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
@@ -362,7 +362,7 @@ namespace Ecommerce.API.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Ecommerce.API.Models.Invoice", b =>
+            modelBuilder.Entity("Ecommerce.API.Models.Order", b =>
                 {
                     b.HasOne("Ecommerce.API.Models.User", "User")
                         .WithMany()

@@ -2,7 +2,6 @@ using Ecommerce.API.Models;
 
 namespace Ecommerce.API.Contracts;
 
-public record RequestRegisterInvoice(
+public record RequestRegisterOrder(
    object DataAddress
-//    Basket Basket
 );

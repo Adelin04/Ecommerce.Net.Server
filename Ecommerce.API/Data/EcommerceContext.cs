@@ -16,7 +16,7 @@ public class EcommerceContext : DbContext
     public virtual DbSet<BasketItems> BasketItems { get; set; }
 
     public virtual DbSet<SizeStock> SizeStocks { get; set; }
-    public virtual DbSet<Invoice> Invoices { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<AddressCustomer> AddressCustomers { get; set; }
 
     public EcommerceContext(DbContextOptions options) : base(options)
@@ -41,7 +41,7 @@ public class EcommerceContext : DbContext
         modelBuilder.Entity<SizeStock>().HasKey(sizeStock => sizeStock.Id);
         modelBuilder.Entity<Basket>().HasKey(basket => basket.Id);
         modelBuilder.Entity<BasketItems>().HasKey(basketItem => basketItem.Id);
-        modelBuilder.Entity<Invoice>().HasKey(invoice=>invoice.Id);
+        modelBuilder.Entity<Order>().HasKey(order=>order.Id);
 
         // Relationships table User,Role,UserRole
         modelBuilder.Entity<UserRole>()
@@ -85,10 +85,9 @@ public class EcommerceContext : DbContext
         );
 
         //Relationships table Invoice,AddressCustomer
-        modelBuilder.Entity<Invoice>(entity =>
+        modelBuilder.Entity<Order>(entity =>
         {
             entity.HasOne<User>(user => user.User);
-            // entity.HasOne<AddressCustomer>(address => address.AddressCustomer);
         });
     }
 }
