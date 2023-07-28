@@ -35,10 +35,6 @@ public class UserRoleRepository : IUserRoleRepository
     {
         var listRoles = await this._context.UserRoles.ToListAsync();
 
-        foreach (var VARIABLE in listRoles)
-        {
-            Console.WriteLine("-> " + VARIABLE);
-        }
         return new List<object>();
     }
 }

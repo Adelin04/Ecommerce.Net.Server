@@ -9,7 +9,7 @@ namespace Ecommerce.API.Models
     {
         public long Id { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         public long? AddressCustomerId { get; set; }
     }

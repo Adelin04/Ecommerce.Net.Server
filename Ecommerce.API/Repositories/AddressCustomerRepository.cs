@@ -31,7 +31,8 @@ namespace Ecommerce.API.Repositories
             return null;
         }
 
-        public async Task<AddressCustomer?> GetAddressCustomerByUserIdAsync(long id)=> await this._context.AddressCustomers.FirstOrDefaultAsync(address=>address.UserId == id);
+        public async Task<AddressCustomer?> GetAddressCustomerByUserIdAsync(long id) => await this._context.AddressCustomers.FirstOrDefaultAsync(address => address.UserId == id);
+        public async Task<AddressCustomer?> GetAddressCustomerByStateCityZipcodeAsync(string state, string city, string street, string zipCode) => await this._context.AddressCustomers.FirstOrDefaultAsync(address => address.State == state && address.City == city && address.Street == street && address.ZipCode == zipCode);
 
     }
 }

@@ -10,4 +10,5 @@ namespace Ecommerce.API.Interfaces;
     {
         Task<AddressCustomer> CreateAddressCustomerAsync(AddressCustomer newAddressCustomer);        
         Task<AddressCustomer> GetAddressCustomerByUserIdAsync(long id);        
+        Task<AddressCustomer> GetAddressCustomerByStateCityZipcodeAsync(string state, string city,string street, string zipCode);        
     }
