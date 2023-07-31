@@ -32,7 +32,10 @@ public class ProductController : ControllerBase
             var newProductCreated = await this._productService.CreateNewProduct_ServiceAsync(productDataRegister);
 
             if (newProductCreated is not null)
+            {
+                this.Logger.LogInformation("A new product has been successfully created -> " + newProductCreated);
                 return Ok(new { Success = true, NewProductCreated = newProductCreated });
+            }
         }
         catch (Exception exception)
         {

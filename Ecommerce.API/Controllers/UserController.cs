@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ecommerce.API.Controllers;
 
 [ApiController]
-[Authorize(Roles = "ADMIN")]
+// [Authorize(Roles = "ADMIN")]
 [Route("api/[controller]/v1")]
 public class UserController : ControllerBase
 {
@@ -45,18 +45,22 @@ public class UserController : ControllerBase
             return BadRequest(new { Error = exception.Message });
         }
 
-        return BadRequest(new { Success = false, Message = "No users found!" });
+        return NotFound(new { Success = false, Message = "The users list not found!" });
     }
 
     [HttpGet("get/userById/{id}")]
     public async Task<ActionResult> GetUserById([FromRoute] long id)
     {
+        ModelState.Remove("password");
         try
         {
             var userById = await this._userService.GetUserById(id);
 
             if (userById is not null)
-                return Ok(new { Success = true, userById = userById });
+            {
+                this.Logger.LogInformation($"The user was successfully returned " + userById);
+                return Ok(new { Success = true, UserById = userById });
+            }
         }
         catch (Exception exception)
         {
@@ -64,7 +68,30 @@ public class UserController : ControllerBase
             this.Logger.LogInformation("Error -> " + exception.Message);
         }
 
-        return BadRequest(new { Success = false, Message = "No user found!" });
+        return NotFound(new { Success = false, Message = "The user not found!" });
+    }
+
+    [HttpGet("get/userByEmail/{email}")]
+    public async Task<ActionResult> GetUserByemail(string email)
+    {
+        ModelState.Remove("password");
+        try
+        {
+            var userByEmail = await this._userService.GetUserByEmail(email);
+
+            if (userByEmail is not null)
+            {
+                this.Logger.LogInformation($"The user was successfully returned " + userByEmail);
+                return Ok(new { Success = true, UserById = userByEmail });
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Error -> " + exception.Message);
+            this.Logger.LogInformation("Error -> " + exception.Message);
+        }
+
+        return NotFound(new { Success = false, Message = "The user not found!" });
     }
 
     [HttpPost("update/userById/{id}")]
@@ -87,7 +114,7 @@ public class UserController : ControllerBase
             return BadRequest(new { Error = exception.Message });
         }
 
-        return BadRequest(new { Success = false, Message = "No user found!" });
+        return NotFound(new { Success = false, Message = "The user not found!" });
     }
 
     [HttpDelete("delete/userById/{id}")]

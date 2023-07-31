@@ -24,8 +24,14 @@ public class UserService
     {
         var userById = await this._userRepository.GetUserByIdAsync(id);
 
-
         return userById;
+    }
+
+    public async Task<User> GetUserByEmail(string email)
+    {
+        var userByEmail = await this._userRepository.GetUserByEmailAsync(email);
+
+        return userByEmail;
     }
 
     public async Task<User> UpdateUserById(long id, UserDataUpdate userDataUpdate)

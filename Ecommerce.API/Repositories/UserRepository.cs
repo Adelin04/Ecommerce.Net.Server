@@ -43,32 +43,32 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByEmailAsync(string email)
     {
-        var foundUserByEmail = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role)
-            .FirstOrDefaultAsync(user => user.Email == email);
+        var foundUserByEmail = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role).FirstOrDefaultAsync(user => user.Email == email);
+        var userAddress = await this._context.Users.Include(user => user.UserAddresses).FirstOrDefaultAsync(user => user.Email == email);
 
         return foundUserByEmail;
     }
 
     public async Task<User> GetUserByIdAsync(long id)
     {
-        var findUserById = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role)
-            .FirstOrDefaultAsync(user => user.Id == id);
+        var foundUserById = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role).FirstOrDefaultAsync(user => user.Id == id);
+        var userAddress = await this._context.Users.Include(user => user.UserAddresses).FirstOrDefaultAsync(user => user.Id == id);
 
-        return findUserById;
+        return foundUserById;
     }
 
     public async Task<User> UpdateUserByIdAsync(long id, UserDataUpdate userDataUpdate)
     {
-        var findUserById = await this._context.Users.FirstOrDefaultAsync(user => user.Id == id);
+        var foundUserById = await this._context.Users.FirstOrDefaultAsync(user => user.Id == id);
 
-        findUserById.FirstName = userDataUpdate.FirstName;
-        findUserById.LastName = userDataUpdate.LastName;
-        findUserById.ProfileImagePath = userDataUpdate.ProfileImagePath;
-        findUserById.Email = userDataUpdate.Email;
+        foundUserById.FirstName = userDataUpdate.FirstName;
+        foundUserById.LastName = userDataUpdate.LastName;
+        foundUserById.ProfileImagePath = userDataUpdate.ProfileImagePath;
+        foundUserById.Email = userDataUpdate.Email;
 
         await this._context.SaveChangesAsync();
 
-        return findUserById;
+        return foundUserById;
     }
 
     public async Task<User> DeleteUserByIdAsync(long id)

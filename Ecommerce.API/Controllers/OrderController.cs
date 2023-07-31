@@ -22,7 +22,22 @@ public class OrderController : ControllerBase
     [HttpPost("dataOrder")]
     public async Task<ActionResult> CreateNewOrderService_Async(RequestRegisterOrder requestRegisterOrder)
     {
-        await this._orderService.CreateNewOrder(requestRegisterOrder);
-        return Ok(new { Success = true });
+        try
+        {
+            var orderCreated = await this._orderService.CreateNewOrder(requestRegisterOrder);
+
+            if (orderCreated is not null)
+            {
+                this.Logger.LogInformation("A new product has been successfully created -> " + orderCreated);
+                return Ok(new { Success = true, NewOrder = orderCreated });
+            }
+        }
+        catch (System.Exception exception)
+        {
+            this.Logger.LogInformation("Error -> " + exception.Message);
+            return BadRequest(new { Success = false, Error = exception.Message });
+        }
+        return BadRequest(new
+        { Success = false, Message = $"The order could not be created!" });
     }
 }

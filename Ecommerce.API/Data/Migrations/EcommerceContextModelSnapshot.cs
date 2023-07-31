@@ -62,7 +62,7 @@ namespace Ecommerce.API.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
+                    b.Property<long?>("UserId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("ZipCode")
@@ -73,7 +73,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AddressCustomers");
+                    b.ToTable("AddressCustomers", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
@@ -89,7 +89,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Baskets");
+                    b.ToTable("Baskets", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>
@@ -119,7 +119,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("BasketItems");
+                    b.ToTable("BasketItems", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.CategoryProduct", b =>
@@ -136,7 +136,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryProducts");
+                    b.ToTable("CategoryProducts", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Order", b =>
@@ -157,7 +157,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
@@ -211,7 +211,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("CategoryProductId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.ProductImages", b =>
@@ -233,7 +233,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("FK_ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Role", b =>
@@ -250,7 +250,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Size", b =>
@@ -267,7 +267,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("Sizes", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.SizeStock", b =>
@@ -293,7 +293,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("FK_SizeId");
 
-                    b.ToTable("SizeStocks");
+                    b.ToTable("SizeStocks", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.User", b =>
@@ -331,28 +331,10 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("Ecommerce.API.Models.UserRole", b =>
-                {
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("Ecommerce.API.Models.UsersAdress", b =>
+            modelBuilder.Entity("Ecommerce.API.Models.UserAddress", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -391,16 +373,32 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersAdresses");
+                    b.ToTable("UsersAdresses", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.UserRole", b =>
+                {
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.AddressCustomer", b =>
                 {
                     b.HasOne("Ecommerce.API.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -474,6 +472,17 @@ namespace Ecommerce.API.Data.Migrations
                     b.Navigation("Size");
                 });
 
+            modelBuilder.Entity("Ecommerce.API.Models.UserAddress", b =>
+                {
+                    b.HasOne("Ecommerce.API.Models.User", "User")
+                        .WithMany("UserAddresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Ecommerce.API.Models.UserRole", b =>
                 {
                     b.HasOne("Ecommerce.API.Models.Role", "Role")
@@ -489,17 +498,6 @@ namespace Ecommerce.API.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Ecommerce.API.Models.UsersAdress", b =>
-                {
-                    b.HasOne("Ecommerce.API.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -529,6 +527,8 @@ namespace Ecommerce.API.Data.Migrations
             modelBuilder.Entity("Ecommerce.API.Models.User", b =>
                 {
                     b.Navigation("Roles");
+
+                    b.Navigation("UserAddresses");
                 });
 #pragma warning restore 612, 618
         }

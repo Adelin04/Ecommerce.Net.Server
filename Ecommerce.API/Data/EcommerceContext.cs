@@ -45,6 +45,8 @@ public class EcommerceContext : DbContext
         modelBuilder.Entity<Order>().HasKey(order => order.Id);
         modelBuilder.Entity<UserAddress>().HasKey(userAddress => userAddress.Id);
 
+
+
         // Relationships table User,Role,UserRole
         modelBuilder.Entity<UserRole>()
             .HasOne<User>(userRole => userRole.User)
@@ -93,8 +95,16 @@ public class EcommerceContext : DbContext
         });
 
         //Relationships table Users, UsersAddresses
-        modelBuilder.Entity<UserAddress>(entity =>
-        entity.HasOne<User>(user => user.User));
+        // modelBuilder.Entity<UserAddress>(entity =>
+        // entity.HasOne<User>(user => user.User));
 
+        // Relationships table User,UserAddress
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasMany(user => user.UserAddresses)
+            .WithOne(address => address.User)
+            .HasForeignKey(address => address.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+        });
     }
 }
