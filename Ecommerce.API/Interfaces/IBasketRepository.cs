@@ -14,4 +14,5 @@ public interface IBasketRepository
 
     public Task<Basket> UpdateBasketById(long id);
     public Task<Basket> DeletBasketById(long id);
+    public Task<Basket> DeletBasketByUserId(long id);
 }

@@ -28,7 +28,7 @@ public class BasketServices
         this._userRepository = userRepository;
     }
 
-    public async Task<Basket> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
+    public async Task<Basket?> AddNewBasket_ServiceAsync(RequestRegisterBasket requestRegisterBasket)
     {
         var existUser = await this._userRepository.GetUserByEmailAsync(requestRegisterBasket.userEmail);
         if (existUser is null) return null;
@@ -39,15 +39,15 @@ public class BasketServices
         {
             await this._basketRepository.DeletBasketById(existBasket.Id);
 
-           /*  foreach (var product in requestRegisterBasket.products)
-            {
-                foreach (var quntitySize in (JArray)product["quantitySize"])
-                {
-                    await this._basketItemRepository.AddNewBasketItem(new BasketItems()
-                    { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = existBasket.Id });
-                }
-            }
-            return existBasket; */
+            /*  foreach (var product in requestRegisterBasket.products)
+             {
+                 foreach (var quntitySize in (JArray)product["quantitySize"])
+                 {
+                     await this._basketItemRepository.AddNewBasketItem(new BasketItems()
+                     { ProductId = (long)product["productId"], Quantity = (int)quntitySize["quantity"], Size = quntitySize["size"].ToString(), BasketId = existBasket.Id });
+                 }
+             }
+             return existBasket; */
         }
 
         var newBasketCreated = await this._basketRepository.AddNewBasket(new Basket() { BuyerId = existUser.Id });
@@ -74,8 +74,25 @@ public class BasketServices
     {
         var userByEmail = await this._userRepository.GetUserByEmailAsync(email);
 
-        if (userByEmail is null)
-            return null;
+        if (userByEmail is null) return null;
+
         return await this._basketRepository.GetBasketByUserId(userByEmail.Id);
+    }
+
+    public async Task<Basket?> DeleteBasketById(long id)
+    {
+        var basketDeleted = await this._basketRepository.DeletBasketById(id);
+
+        return basketDeleted;
+    }
+
+    public async Task<Basket?> DeleteBasketByUserEmail(string email)
+    {
+        var userByEmail = await this._userRepository.GetUserByEmailAsync(email);
+
+        if (userByEmail is null) return null;
+        var basketDeleted = await this._basketRepository.DeletBasketByUserId(userByEmail.Id);
+
+        return basketDeleted;
     }
 }

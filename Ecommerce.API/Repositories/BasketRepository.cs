@@ -44,6 +44,22 @@ public class BasketRepository : IBasketRepository
 
         return basketToDelete;
     }
+
+    public async Task<Basket?> DeletBasketByUserId(long id)
+    {
+        var basketToDelete = await this._context.Baskets.FirstOrDefaultAsync(basket => basket.BuyerId == id);
+
+        if (basketToDelete is not null)
+        {
+            var removedBasketById = this._context.Baskets.Remove(basketToDelete);
+
+            await this._context.SaveChangesAsync();
+        }
+
+        return basketToDelete;
+    }
+
+
     public async Task<List<Basket>> GetAllBasket() => await this._context.Baskets.ToListAsync();
 
     public async Task<Basket?> GetBasketByUserId(long id) => await this._context.Baskets.Include(item => item.Items).FirstOrDefaultAsync(basket => basket.BuyerId == id);

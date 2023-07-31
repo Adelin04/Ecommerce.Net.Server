@@ -104,4 +104,49 @@ public class BasketController : ControllerBase
         return BadRequest(new { Success = false, Message = "The Basket could not be found!" });
     }
 
+    [HttpDelete("delete/basketById/{id}")]
+
+    public async Task<ActionResult> DeleteBasketById(long id)
+    {
+        try
+        {
+            var basketDeleted = await this._basketServices.DeleteBasketById(id);
+            if (basketDeleted is not null)
+            {
+                this._logger.LogInformation($"Basket with id {id} was successfully deleted");
+                return Ok(new { Success = true, BasketDeleted = basketDeleted });
+            }
+        }
+        catch (System.Exception exception)
+        {
+            this._logger.LogInformation($"{exception.Message}");
+            return BadRequest(new { Success = false, Message = $"{exception.Message}" });
+        }
+
+        this._logger.LogInformation($"The basket with id {id} could not be found");
+        return NotFound(new { Success = false, Message = $"The basket with id {id} could not be found" });
+    }
+
+    [HttpDelete("delete/basketByUserEmail/{email}")]
+
+    public async Task<ActionResult> DeleteBasketByUserEmail(string email)
+    {
+        try
+        {
+            var basketDeleted = await this._basketServices.DeleteBasketByUserEmail(email);
+            if (basketDeleted is not null)
+            {
+                this._logger.LogInformation($"Basket with id {basketDeleted.Id} was successfully deleted");
+                return Ok(new { Success = true, BasketDeleted = basketDeleted });
+            }
+        }
+        catch (System.Exception exception)
+        {
+            this._logger.LogInformation($"{exception.Message}");
+            return BadRequest(new { Success = false, Message = $"{exception.Message}" });
+        }
+
+        this._logger.LogInformation($"The basket could not be found");
+        return NotFound(new { Success = false, Message = $"The basket could not be found" });
+    }
 }

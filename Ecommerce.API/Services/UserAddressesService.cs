@@ -16,12 +16,10 @@ public class UserAddressesService
         this._userAddressesRepository = userAddressesRepository;
     }
 
-    public async Task<UserAddress> GetUserAddressesByUserId_ServiceAsync(long id)
+    public async Task<UserAddress?> GetUserAddressesByUserId_ServiceAsync(long id)
     {
 
         var existUserAddress = await this._userAddressesRepository.GetUserAdressByUserId(id);
-
-        if (existUserAddress is null) return null;
 
         return existUserAddress;
     }
