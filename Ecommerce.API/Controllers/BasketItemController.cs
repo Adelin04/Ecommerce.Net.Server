@@ -100,7 +100,7 @@ public class BasketItemController : ControllerBase
         return BadRequest(new { Success = false, Message = "Baskets item could not be deleted!" });
     }
 
-    [HttpPost("decrement/quntity/basketItemById/{id}/{size}")]
+    [HttpPost("decrement/quantity/basketItemById/{id}/{size}")]
     public async Task<ActionResult> DecrementItemQuantity([FromRoute] long id, [FromRoute] string size)
     {
 
