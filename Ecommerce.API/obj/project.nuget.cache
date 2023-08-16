@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J9cb8+CJEgiuWiwPeXnD2K27Ptsbq5CPnxLVVSXG4Hx3lXjU1tBg6tFruCW8t1ie85mVLns7hg2GPhtjo1f6HQ==",
+  "dgSpecHash": "91j9js6VHkaNKsXvVbCP1QX8Vcjw3T5whq2YYAEXY4+DVM5H57/98piVtv4FJ0SxYqZF3fmsz7r6LMW+LEt/mg==",
   "success": true,
-  "projectFilePath": "D:\\___ADELIN___\\tmp\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+  "projectFilePath": "D:\\___ADELIN___\\__UTILS__\\projects\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Video.VIDEO-PC\\.nuget\\packages\\awssdk.core\\3.7.105.18\\awssdk.core.3.7.105.18.nupkg.sha512",
     "C:\\Users\\Video.VIDEO-PC\\.nuget\\packages\\awssdk.s3\\3.7.103.26\\awssdk.s3.3.7.103.26.nupkg.sha512",
