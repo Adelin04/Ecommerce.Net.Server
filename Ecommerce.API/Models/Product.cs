@@ -32,6 +32,10 @@ public class Product
     public virtual long CategoryProductId { get; set; }
     public virtual CategoryProduct CategoryProduct { get; set; }
 
+    // Relationship SuperCategoryProduct
+    public virtual long SuperCategoryProductId { get; set; }
+    public virtual SuperCategoryProduct SuperCategoryProduct { get; set; }
+
 
     // Relationship SizeStock
     public virtual ICollection<SizeStock> SizeStocks { get; set; }

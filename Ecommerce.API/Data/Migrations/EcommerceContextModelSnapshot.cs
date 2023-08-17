@@ -73,7 +73,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AddressCustomers", (string)null);
+                    b.ToTable("AddressCustomers");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Basket", b =>
@@ -89,7 +89,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Baskets", (string)null);
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.BasketItems", b =>
@@ -119,7 +119,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("BasketItems", (string)null);
+                    b.ToTable("BasketItems");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.CategoryProduct", b =>
@@ -136,7 +136,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryProducts", (string)null);
+                    b.ToTable("CategoryProducts");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Order", b =>
@@ -157,7 +157,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Product", b =>
@@ -204,6 +204,9 @@ namespace Ecommerce.API.Data.Migrations
                     b.Property<long>("Stock")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("SuperCategoryProductId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -211,7 +214,9 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("CategoryProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.HasIndex("SuperCategoryProductId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.ProductImages", b =>
@@ -233,7 +238,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("FK_ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Role", b =>
@@ -250,7 +255,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", (string)null);
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.Size", b =>
@@ -267,7 +272,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes", (string)null);
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.SizeStock", b =>
@@ -293,7 +298,24 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("FK_SizeId");
 
-                    b.ToTable("SizeStocks", (string)null);
+                    b.ToTable("SizeStocks");
+                });
+
+            modelBuilder.Entity("Ecommerce.API.Models.SuperCategoryProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SuperCategoryProducts");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.User", b =>
@@ -331,7 +353,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.UserAddress", b =>
@@ -373,7 +395,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UsersAdresses", (string)null);
+                    b.ToTable("UsersAdresses");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.UserRole", b =>
@@ -391,7 +413,7 @@ namespace Ecommerce.API.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", (string)null);
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.AddressCustomer", b =>
@@ -439,7 +461,15 @@ namespace Ecommerce.API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Ecommerce.API.Models.SuperCategoryProduct", "SuperCategoryProduct")
+                        .WithMany()
+                        .HasForeignKey("SuperCategoryProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("CategoryProduct");
+
+                    b.Navigation("SuperCategoryProduct");
                 });
 
             modelBuilder.Entity("Ecommerce.API.Models.ProductImages", b =>

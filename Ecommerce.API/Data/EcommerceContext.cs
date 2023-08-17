@@ -11,6 +11,7 @@ public class EcommerceContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
     public virtual DbSet<Size> Sizes { get; set; }
     public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
+    public virtual DbSet<SuperCategoryProduct> SuperCategoryProducts { get; set; }
     public virtual DbSet<ProductImages> ProductImages { get; set; }
     public virtual DbSet<Basket> Baskets { get; set; }
     public virtual DbSet<BasketItems> BasketItems { get; set; }
@@ -30,6 +31,7 @@ public class EcommerceContext : DbContext
         modelBuilder.Entity<User>().HasKey(user => user.Id);
         modelBuilder.Entity<Product>().HasKey(product => product.Id);
         modelBuilder.Entity<CategoryProduct>().HasKey(categoryProduct => categoryProduct.Id);
+        modelBuilder.Entity<SuperCategoryProduct>().HasKey(superCategoryProduct => superCategoryProduct.Id);
         modelBuilder.Entity<Size>().HasKey(size => size.Id);
         modelBuilder.Entity<Role>().HasKey(role => role.Id);
         modelBuilder.Entity<UserRole>().HasKey(userRole =>

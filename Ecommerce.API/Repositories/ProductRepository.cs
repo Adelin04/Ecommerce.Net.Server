@@ -38,7 +38,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<Product>?> GetAllProductsAsync()
     {
-        return await this._context.Products.Include(categoryProduct => categoryProduct.CategoryProduct)
+        return await this._context.Products.Include(categoryProduct => categoryProduct.CategoryProduct).Include(product => product.SuperCategoryProduct)
              .Include(product => product.ProductImages).Include(product => product.SizeStocks).ThenInclude(size => size.Size).ToListAsync();
     }
 
