@@ -13,5 +13,6 @@ public record ProductDataRegister
     string Size,
     long stock,
     string CategoryName,
+    string SuperCategoryName,
     List<IFormFile> Files
 );

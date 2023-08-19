@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // DB_CONTEXT
 var DEV_DB = builder.Configuration.GetConnectionString("DevConnection");
-var PRODUCTION_DB = builder.Configuration.GetConnectionString("DefaulConnection");
+var PRODUCTION_DB = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<EcommerceContext>(options => options.UseNpgsql(DEV_DB));
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -72,6 +72,7 @@ builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<ICategoryProductRepository, CategoryProductRepository>();
+builder.Services.AddTransient<ISuperCategoryProductRepository, SuperCategoryProductRepository>();
 builder.Services.AddTransient<ISizeRepository, SizeRepository>();
 builder.Services.AddTransient<ISizeStockRepository, SizeStockRepository>();
 builder.Services.AddTransient<IProductImagesRepository, ProductImagesRepository>();
@@ -87,6 +88,7 @@ builder.Services.AddScoped<UserRoleService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductImagesService>();
 builder.Services.AddScoped<CategoryProductService>();
+builder.Services.AddScoped<SuperCategoryProductService>();
 builder.Services.AddScoped<SizeService>();
 builder.Services.AddScoped<AwsS3StorageImagesService>();
 builder.Services.AddScoped<BasketServices>();

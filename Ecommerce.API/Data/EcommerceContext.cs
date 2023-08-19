@@ -64,6 +64,9 @@ public class EcommerceContext : DbContext
         //Relationships table Product,CategoryProduct
         modelBuilder.Entity<Product>(entity => entity.HasOne<CategoryProduct>(product => product.CategoryProduct));
 
+        //Relationships table Product,SuperCategoryProduct
+        modelBuilder.Entity<Product>(entity => entity.HasOne<SuperCategoryProduct>(product => product.SuperCategoryProduct));
+
         //Relationships table Product,Size,SizeStock
         modelBuilder.Entity<SizeStock>(entity =>
         {

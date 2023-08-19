@@ -9,6 +9,7 @@ public class ProductService
 {
     private readonly IProductRepository _productRepository;
     private readonly ICategoryProductRepository _categoryProductRepository;
+    private readonly ISuperCategoryProductRepository _superCategoryProductRepository;
     private readonly ISizeStockRepository _sizeStockRepository;
     private readonly ISizeRepository _sizeRepository;
     private readonly IConfiguration _configuration;
@@ -16,13 +17,14 @@ public class ProductService
     private readonly ProductImagesService _productImagesService;
 
 
-    public ProductService(IProductRepository productRepository, ICategoryProductRepository categoryProductRepository,
+    public ProductService(IProductRepository productRepository, ICategoryProductRepository categoryProductRepository, ISuperCategoryProductRepository superCategoryProductRepository,
         ISizeStockRepository sizeStockRepository, ISizeRepository sizeRepository, IConfiguration configuration,
         ProductImagesService productImagesService,
         AwsS3StorageImagesService imagesService)
     {
         this._productRepository = productRepository;
         this._categoryProductRepository = categoryProductRepository;
+        this._superCategoryProductRepository = superCategoryProductRepository;
         this._sizeStockRepository = sizeStockRepository;
         this._sizeRepository = sizeRepository;
         this._configuration = configuration;
@@ -38,6 +40,8 @@ public class ProductService
 
         var existCategoryProduct =
             await this._categoryProductRepository.GetCategoryProductByNameAsync(productDataRegister.CategoryName);
+        var existSuperCategoryProduct =
+            await this._superCategoryProductRepository.GetSuperCategoryProductByNameAsync(productDataRegister.SuperCategoryName);
 
         var findSizesProduct = await this._sizeRepository.GetAllSizeAsync();
 
@@ -54,6 +58,10 @@ public class ProductService
 
         //  Add FOREIGNKEY category product
         newProduct.CategoryProductId = existCategoryProduct.Id;
+        newProduct.SuperCategoryProductId = existSuperCategoryProduct.Id;
+
+        System.Console.WriteLine(newProduct.CategoryProductId);
+        System.Console.WriteLine(newProduct.SuperCategoryProductId);
 
         var newProductCreated = await this._productRepository.CreateNewProductAsync(newProduct);
 

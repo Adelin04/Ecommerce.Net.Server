@@ -56,8 +56,8 @@ public class CategoryProductController : ControllerBase
 
             if (listOfCategories.Count < 1)
             {
-                this.Logger.LogInformation($"Returned product category list");
-                return Ok(new { Message = $"Products list is empty -> {listOfCategories.Count}" });
+                this.Logger.LogInformation($"Returned category list");
+                return Ok(new { Message = $"Category product list is empty -> {listOfCategories.Count} items" });
             }
         }
         catch (Exception exception)
