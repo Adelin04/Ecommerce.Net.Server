@@ -6,6 +6,7 @@ using Ecommerce.API.Contracts;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol;
 
 namespace Ecommerce.API.Services;
 
@@ -59,20 +60,18 @@ public class AuthService
 
     public async Task<List<object>> Login(UserDataLogin userDataLogin)
     {
-        string token = null;
+        string? token = null;
         var existingUser = await this._userRepository.GetUserByEmailAsync(userDataLogin.Email);
         var basketExistByUser = await this._basketRepository.GetBasketByUserId(existingUser.Id);
-
         if (existingUser is not null)
         {
             var matchPassword = BCrypt.Net.BCrypt.Verify(userDataLogin.Password, existingUser.Password);
 
             if (matchPassword)
                 token = GenerateToken(existingUser);
-
         }
 
-        return new List<object>() { token, basketExistByUser };
+        return new List<object>() {token, basketExistByUser, existingUser?.UserAddresses};
     }
 
     private string GenerateToken(User user)

@@ -32,7 +32,11 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> GetAllUsersAsync()
     {
-        var usersList = await this._context.Users.Include(user => user.Roles).ToListAsync();
+        var usersList = await this._context.Users
+            .Include(user => user.Roles)
+            .Include(address => address.UserAddresses)
+            .ToListAsync();
+
         // var usersList = await this._context.Users
         //     .Join(this._context.UserRoles, user => user.Id, userRole => userRole.UserId, (u, ur) => new { u, ur })
         //     .Join(this._context.Role, userRole => userRole.ur.RoleId, role => role.Id, (ur, r) => new { ur, r })
@@ -41,18 +45,26 @@ public class UserRepository : IUserRepository
         return usersList;
     }
 
-    public async Task<User> GetUserByEmailAsync(string email)
+    public async Task<User?> GetUserByEmailAsync(string email)
     {
-        var foundUserByEmail = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role).FirstOrDefaultAsync(user => user.Email == email);
-        var userAddress = await this._context.Users.Include(user => user.UserAddresses).FirstOrDefaultAsync(user => user.Email == email);
+        var foundUserByEmail = await this._context.Users
+            .Include(user => user.Roles)
+            .ThenInclude(role => role.Role)
+            .Include(address => address.UserAddresses)
+            .FirstOrDefaultAsync(user => user.Email == email);
+        // var userAddress = await this._context.Users.Include(user => user.UserAddresses)
+        //     .FirstOrDefaultAsync(user => user.Email == email);
 
         return foundUserByEmail;
     }
 
-    public async Task<User> GetUserByIdAsync(long id)
+    public async Task<User?> GetUserByIdAsync(long id)
     {
-        var foundUserById = await this._context.Users.Include(user => user.Roles).ThenInclude(role => role.Role).FirstOrDefaultAsync(user => user.Id == id);
-        var userAddress = await this._context.Users.Include(user => user.UserAddresses).FirstOrDefaultAsync(user => user.Id == id);
+        var foundUserById = await this._context.Users
+            .Include(user => user.Roles)
+            .ThenInclude(role => role.Role)
+            .Include(address => address.UserAddresses)
+            .FirstOrDefaultAsync(user => user.Id == id);
 
         return foundUserById;
     }
@@ -84,7 +96,4 @@ public class UserRepository : IUserRepository
 
         return null;
     }
-
-
-
 }

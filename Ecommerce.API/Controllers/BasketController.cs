@@ -19,7 +19,6 @@ namespace Ecommerce.API.Controllers;
 [ApiController]
 public class BasketController : ControllerBase
 {
-
     private readonly BasketServices _basketServices;
     private readonly ILogger<BasketController> _logger;
 
@@ -40,22 +39,22 @@ public class BasketController : ControllerBase
             if (listOfBaskets is not null)
             {
                 this._logger.LogInformation($"Returned baskets list");
-                return Ok(new { Success = true, Baskets = listOfBaskets, Count = listOfBaskets.Count });
+                return Ok(new {Success = true, Baskets = listOfBaskets, Count = listOfBaskets.Count});
             }
 
             if (listOfBaskets.Count < 1)
             {
                 this._logger.LogInformation($"Returned baskets list");
-                return Ok(new { Message = $"Baskets list is empty -> {listOfBaskets.Count}" });
+                return Ok(new {Message = $"Baskets list is empty -> {listOfBaskets.Count}"});
             }
         }
         catch (Exception exception)
         {
             this._logger.LogInformation("Error -> " + exception.Message);
-            return BadRequest(new { Error = exception.Message });
+            return BadRequest(new {Error = exception.Message});
         }
 
-        return BadRequest(new { Success = false, Message = "Baskets list could not be returned!" });
+        return BadRequest(new {Success = false, Message = "Baskets list could not be returned!"});
     }
 
     [HttpPost("add/newBasket")]
@@ -68,22 +67,21 @@ public class BasketController : ControllerBase
             if (newBasketCrated is not null)
             {
                 this._logger.LogInformation($"New basket successfully created");
-                return Ok(new { Success = true, NewBasketCreated = newBasketCrated });
+                return Ok(new {Success = true, NewBasketCreated = newBasketCrated});
             }
-
         }
         catch (System.Exception exception)
         {
             this._logger.LogInformation("Error -> " + exception.Message);
-            return BadRequest(new { Error = exception.Message });
+            return BadRequest(new {Error = exception.Message});
         }
-        return BadRequest(new { Success = false, Message = "Basket could not be created!" });
+
+        return BadRequest(new {Success = false, Message = "Basket could not be created!"});
     }
 
     [HttpPost("get/basketByUserEmail/{userEmail}")]
     public async Task<ActionResult> GetBasketByUserEmail([FromRoute] string userEmail)
     {
-
         try
         {
             var basketByUserEmail = await this._basketServices.GetBasketByUserEmail_ServiceAsync(userEmail);
@@ -91,21 +89,19 @@ public class BasketController : ControllerBase
             if (basketByUserEmail is not null)
             {
                 this._logger.LogInformation("The basket given by the user id");
-                return Ok(new { Success = true, BasketByUserEmail = basketByUserEmail });
+                return Ok(new {Success = true, BasketByUserEmail = basketByUserEmail});
             }
-
         }
         catch (System.Exception exception)
         {
             this._logger.LogInformation("Error -> " + exception.Message);
-            return BadRequest(new { Error = exception.Message });
-
+            return BadRequest(new {Error = exception.Message});
         }
-        return BadRequest(new { Success = false, Message = "The Basket could not be found!" });
+
+        return BadRequest(new {Success = false, Message = "The Basket could not be found!"});
     }
 
     [HttpDelete("delete/basketById/{id}")]
-
     public async Task<ActionResult> DeleteBasketById(long id)
     {
         try
@@ -114,21 +110,20 @@ public class BasketController : ControllerBase
             if (basketDeleted is not null)
             {
                 this._logger.LogInformation($"Basket with id {id} was successfully deleted");
-                return Ok(new { Success = true, BasketDeleted = basketDeleted });
+                return Ok(new {Success = true, BasketDeleted = basketDeleted});
             }
         }
         catch (System.Exception exception)
         {
             this._logger.LogInformation($"{exception.Message}");
-            return BadRequest(new { Success = false, Message = $"{exception.Message}" });
+            return BadRequest(new {Success = false, Message = $"{exception.Message}"});
         }
 
         this._logger.LogInformation($"The basket with id {id} could not be found");
-        return NotFound(new { Success = false, Message = $"The basket with id {id} could not be found" });
+        return NotFound(new {Success = false, Message = $"The basket with id {id} could not be found"});
     }
 
     [HttpDelete("delete/basketByUserEmail/{email}")]
-
     public async Task<ActionResult> DeleteBasketByUserEmail(string email)
     {
         try
@@ -137,16 +132,16 @@ public class BasketController : ControllerBase
             if (basketDeleted is not null)
             {
                 this._logger.LogInformation($"Basket with id {basketDeleted.Id} was successfully deleted");
-                return Ok(new { Success = true, BasketDeleted = basketDeleted });
+                return Ok(new {Success = true, BasketDeleted = basketDeleted});
             }
         }
         catch (System.Exception exception)
         {
             this._logger.LogInformation($"{exception.Message}");
-            return BadRequest(new { Success = false, Message = $"{exception.Message}" });
+            return BadRequest(new {Success = false, Message = $"{exception.Message}"});
         }
 
         this._logger.LogInformation($"The basket could not be found");
-        return NotFound(new { Success = false, Message = $"The basket could not be found" });
+        return NotFound(new {Success = false, Message = $"The basket could not be found"});
     }
 }

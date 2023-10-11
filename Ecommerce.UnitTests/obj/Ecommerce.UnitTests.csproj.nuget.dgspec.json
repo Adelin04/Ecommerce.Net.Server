@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {}
+    "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {}
   },
   "projects": {
-    "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {
+    "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+        "projectUniqueName": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
         "projectName": "Ecommerce.UnitTests",
-        "projectPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
-        "packagesPath": "C:\\Users\\adeli\\.nuget\\packages\\",
-        "outputPath": "f:\\__GitProjects\\__NEW__\\ECOMMERCE\\__DEPLOYED__\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\obj\\",
+        "projectPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\Ecommerce.UnitTests.csproj",
+        "packagesPath": "C:\\Users\\MAVERICK\\.nuget\\packages\\",
+        "outputPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\adeli\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\MAVERICK\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.1.23115.2\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.413\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9661,11 +9661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "projectUniqueName": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
       "projectName": "Ecommerce.API",
-      "projectPath": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "projectPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
       "packagesPath": "C:\\Users\\MAVERICK\\.nuget\\packages\\",
-      "outputPath": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
+      "outputPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MAVERICK\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -9760,7 +9760,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.413\\RuntimeIdentifierGraph.json"
       }
     }
   }

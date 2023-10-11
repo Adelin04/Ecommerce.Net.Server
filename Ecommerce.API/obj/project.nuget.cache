@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gr0M7uPaG2t5/8Kl2Kqy2Y3Iwdl0k0iPo/93X21Uf4iuY3uOPntXyLouP9xGTGNMmKP8Uh3EITaB6Co+JdfRvA==",
+  "dgSpecHash": "YNhYCVypnYJ9/eP5QLJe2sq31ZCVDCVfv02tbpX4c3pgc8S4M+Gqk6N0nCySSlHXVxlJVNsD/iraHL95BIjpWw==",
   "success": true,
-  "projectFilePath": "E:\\__Projects__\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+  "projectFilePath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAVERICK\\.nuget\\packages\\awssdk.core\\3.7.105.18\\awssdk.core.3.7.105.18.nupkg.sha512",
     "C:\\Users\\MAVERICK\\.nuget\\packages\\awssdk.s3\\3.7.103.26\\awssdk.s3.3.7.103.26.nupkg.sha512",
