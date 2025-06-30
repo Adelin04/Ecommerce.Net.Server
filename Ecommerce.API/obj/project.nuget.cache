@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YNhYCVypnYJ9/eP5QLJe2sq31ZCVDCVfv02tbpX4c3pgc8S4M+Gqk6N0nCySSlHXVxlJVNsD/iraHL95BIjpWw==",
+  "dgSpecHash": "YHxPfyRHuoBKgLptZFyMEedzE9RcwUi1r1x0T3X40L1OB5k/kcVqnZHTmeuk33KW5C732x0HAG3Z3PbUjjDYCg==",
   "success": true,
-  "projectFilePath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+  "projectFilePath": "E:\\__Projects__\\Ecommerce\\PRODUCTION\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAVERICK\\.nuget\\packages\\awssdk.core\\3.7.105.18\\awssdk.core.3.7.105.18.nupkg.sha512",
     "C:\\Users\\MAVERICK\\.nuget\\packages\\awssdk.s3\\3.7.103.26\\awssdk.s3.3.7.103.26.nupkg.sha512",
@@ -178,7 +178,11 @@
     "C:\\Users\\MAVERICK\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\MAVERICK\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\MAVERICK\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\MAVERICK\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\MAVERICK\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\MAVERICK\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.31\\microsoft.netcore.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\MAVERICK\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.31\\microsoft.windowsdesktop.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\MAVERICK\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.31\\microsoft.aspnetcore.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\MAVERICK\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.31\\microsoft.netcore.app.host.win-x64.6.0.31.nupkg.sha512"
   ],
   "logs": []
 }

@@ -9661,11 +9661,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "projectUniqueName": "e:\\__Projects__\\Ecommerce\\PRODUCTION\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
       "projectName": "Ecommerce.API",
-      "projectPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
+      "projectPath": "e:\\__Projects__\\Ecommerce\\PRODUCTION\\Ecommerce.Net.Server\\Ecommerce.API\\Ecommerce.API.csproj",
       "packagesPath": "C:\\Users\\MAVERICK\\.nuget\\packages\\",
-      "outputPath": "E:\\__Projects__\\Ecommerce\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
+      "outputPath": "e:\\__Projects__\\Ecommerce\\PRODUCTION\\Ecommerce.Net.Server\\Ecommerce.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MAVERICK\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -9686,6 +9686,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -9752,6 +9757,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.31, 6.0.31]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.31, 6.0.31]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.31, 6.0.31]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.31, 6.0.31]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -9760,7 +9783,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206\\RuntimeIdentifierGraph.json"
       }
     }
   }
